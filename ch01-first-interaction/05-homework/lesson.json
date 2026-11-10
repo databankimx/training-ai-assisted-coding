@@ -1,0 +1,10 @@
+{
+  "title": "Homework: A Three-Function Module",
+  "section": "Homework",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "spoiler": true,
+  "minutes": 45,
+  "objective": "Write expected results for three small functions first, let an assistant write each one, and check every function against your expectations.",
+  "prerequisites": ["Reject, Refine, or Write It Yourself"]
+}

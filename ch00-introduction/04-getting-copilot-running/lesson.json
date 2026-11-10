@@ -1,0 +1,7 @@
+{
+  "title": "Getting Copilot Running",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Sign in to GitHub Copilot in Visual Studio 2026 or VS Code, and prove it works with a question that has nothing to do with company code.",
+  "prerequisites": ["You Own the Code"]
+}

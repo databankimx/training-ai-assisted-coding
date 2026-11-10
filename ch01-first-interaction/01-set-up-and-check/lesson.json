@@ -1,0 +1,7 @@
+{
+  "title": "Set Up and Check Your Tools",
+  "runtime": "none",
+  "minutes": 15,
+  "objective": "Confirm that your assistant is signed in with the right account, make a practice folder, and send one safe test request.",
+  "prerequisites": ["Summary: Introduction"]
+}

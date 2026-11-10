@@ -1,0 +1,9 @@
+{
+  "title": "Read Before You Accept",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Check an assistant's suggestion against examples you wrote first, and decide to keep it, change it, or drop it.",
+  "prerequisites": ["Let the Assistant Finish a Small Function"],
+  "expected": "1 -> not prime\n2 -> prime\n9 -> not prime\n11 -> prime"
+}

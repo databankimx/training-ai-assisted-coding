@@ -1,0 +1,7 @@
+{
+  "title": "Confidential Data and Company Accounts",
+  "runtime": "none",
+  "minutes": 15,
+  "objective": "Apply the company's AI policy to a real prompt: decide what can be shared with an AI tool, rewrite a prompt safely, and know where to report a problem.",
+  "prerequisites": ["Getting Copilot Running"]
+}

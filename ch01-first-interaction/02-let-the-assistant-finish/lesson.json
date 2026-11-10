@@ -1,0 +1,9 @@
+{
+  "title": "Let the Assistant Finish a Small Function",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 20,
+  "objective": "Type the start of a small function, see the assistant's suggestion, and finish the function yourself in the language you choose.",
+  "prerequisites": ["Set Up and Check Your Tools"],
+  "expected": "2 + 3 = 5\n4 is even\n7 is odd"
+}

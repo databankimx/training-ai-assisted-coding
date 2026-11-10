@@ -1,0 +1,9 @@
+{
+  "title": "Reject, Refine, or Write It Yourself",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Decide what to do with a wrong suggestion: keep it, refine it with a specific request, or write it yourself. Then do it and check the result.",
+  "prerequisites": ["Read Before You Accept"],
+  "expected": "1 -> not prime\n2 -> prime\n9 -> not prime\n11 -> prime"
+}
