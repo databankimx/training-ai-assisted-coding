@@ -1,0 +1,9 @@
+{
+  "title": "Giving the Spec to the Assistant",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Run the generated code against every acceptance row, read the check record, and report a failure as a precise follow-up that is checked against the whole table.",
+  "prerequisites": ["Acceptance Examples"],
+  "expected": "days 0: 0 pass\ndays 3: 0 pass\ndays 4: 25 pass\ndays 83: 2000 pass\ndays 200: 2000 pass\ndays -1: error pass"
+}

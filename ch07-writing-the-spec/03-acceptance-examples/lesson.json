@@ -1,0 +1,9 @@
+{
+  "title": "Acceptance Examples",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Write acceptance examples that cover the boundaries and the error cases of a spec, see how a weak table can pass a defective function, and turn the table into a check that runs.",
+  "prerequisites": ["The Spec Template"],
+  "expected": "days 0: 0 pass\ndays 3: 0 pass\ndays 4: 25 pass\ndays 83: 2000 pass\ndays 200: 2000 pass\ndays -1: error pass"
+}

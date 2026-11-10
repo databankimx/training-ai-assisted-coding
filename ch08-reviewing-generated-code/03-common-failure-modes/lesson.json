@@ -1,0 +1,9 @@
+{
+  "title": "Common Failure Modes",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 30,
+  "objective": "Run cases that show the common failure modes in each language, recognize each one, and fix the cases that show a failure.",
+  "prerequisites": ["Stale and Invented APIs"],
+  "expected": "parse abc: error (not a number: abc)\nvalue: 42\nsteps after cancel: 0"
+}

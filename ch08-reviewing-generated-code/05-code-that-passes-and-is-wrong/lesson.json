@@ -1,0 +1,9 @@
+{
+  "title": "Code That Passes Every Check and Is Still Wrong",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Run code that passes a circular test and fails a spec test, find a unit mismatch at a call site, and name the review question that finds each kind of defect.",
+  "prerequisites": ["A Review Checklist"],
+  "expected": "circular test: passed\nspec test: passed\ncost: 2600 cents"
+}

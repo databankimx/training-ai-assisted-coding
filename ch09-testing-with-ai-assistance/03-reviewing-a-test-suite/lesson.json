@@ -1,0 +1,9 @@
+{
+  "title": "Reviewing a Generated Test Suite",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 30,
+  "objective": "Judge a test suite by the defects it can catch, using deliberately broken versions of the code, and extend the suite until every broken version is caught.",
+  "prerequisites": ["Writing Acceptance Tests First"],
+  "expected": "mutant grace one day long: caught\nmutant no cap: caught\nmutant no error: caught"
+}

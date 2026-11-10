@@ -1,0 +1,9 @@
+{
+  "title": "Why Generated Tests Look Finished",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Recognize the ways a generated test suite passes on wrong code, and replace the weak tests with tests that come from the spec.",
+  "prerequisites": ["Summary: Reviewing Generated Code"],
+  "expected": "test zero within the grace period: pass\ntest 25 cents per day after the grace period: pass\ntest caps at 2000: pass\ntest rejects negative days: pass"
+}

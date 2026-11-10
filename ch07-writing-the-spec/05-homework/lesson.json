@@ -1,0 +1,11 @@
+{
+  "title": "Homework: A Spec for a Settings Parser",
+  "section": "Homework",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "spoiler": true,
+  "minutes": 60,
+  "objective": "Write a spec and acceptance table for a small parser, run a generated parser against the rows, find the defects the rows show, and fix the parser to the spec.",
+  "prerequisites": ["Giving the Spec to the Assistant"],
+  "expected": "\"name=archive\" -> name=archive pass\n\"name=archive;\" -> name=archive pass\n\"name = archive ; enabled = true\" -> enabled=true, name=archive pass\n\"url=a=b\" -> url=a=b pass\n\"name=\" -> name= pass\n\"\" -> (none) pass\n\"name\" -> error pass\n\"=archive\" -> error pass\n\"name=a; name=b\" -> error pass\n\";;name=x;;\" -> name=x pass"
+}

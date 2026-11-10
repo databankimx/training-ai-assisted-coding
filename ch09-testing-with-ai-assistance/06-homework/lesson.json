@@ -1,0 +1,11 @@
+{
+  "title": "Homework: Completing a Test Suite",
+  "section": "Homework",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "spoiler": true,
+  "minutes": 45,
+  "objective": "Find the gaps in a generated test suite with mutants, add the tests that close each gap, and explain each added test by the mutant it catches.",
+  "prerequisites": ["Test-First Development in Both Directions"],
+  "expected": "mutant grace one day long: caught\nmutant grace two days short: caught\nmutant no cap: caught\nmutant no error: caught"
+}

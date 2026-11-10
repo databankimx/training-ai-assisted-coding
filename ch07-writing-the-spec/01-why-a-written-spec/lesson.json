@@ -1,0 +1,7 @@
+{
+  "title": "Why a Written Spec Beats a Long Chat",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Explain what a written specification gives you that a long conversation cannot, and recognize the signs that a conversation is standing in for a spec.",
+  "prerequisites": ["Summary: Context Documents"]
+}

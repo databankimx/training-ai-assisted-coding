@@ -1,0 +1,7 @@
+{
+  "title": "The Spec Template",
+  "runtime": "none",
+  "minutes": 25,
+  "objective": "Write each section of a specification, say what each section prevents, and tell a complete section from a vague one.",
+  "prerequisites": ["Why a Written Spec Beats a Long Chat"]
+}

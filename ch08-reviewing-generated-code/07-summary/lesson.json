@@ -1,0 +1,7 @@
+{
+  "title": "Summary: Reviewing Generated Code",
+  "runtime": "none",
+  "minutes": 8,
+  "objective": "Review how to read generated code, the failure modes it produces, the checklist that structures a review, and the defects that passing checks don't catch.",
+  "prerequisites": ["Homework: Review Three Generated Functions"]
+}

@@ -72,6 +72,18 @@ Write a report of three to five sentences for each part below.
 - **Where the document was missing.** Name one place the assistant guessed, because the document didn't cover it. Say what it guessed, and what the document would need to say to prevent it.
 - **What you would add first.** Name the single line you'd add to the document to prevent the most expensive mistake you saw.
 
+## Run it
+
+The starter is a grace-period feature as an assistant might generate it from a context document that didn't mention the grace period. It applies the fine from the first overdue day and ignores the three free days. The harness checks the five cases from the list below. Press **Run** (or F5) and read each line.
+
+Two cases fail. A book one day late should owe nothing, and a book four days late should owe 25 cents, not 100. The cap case passes, which is why a quick look at the output would miss the defect: the cap hides the wrong grace period for large numbers of days.
+
+Press **Check** on the starter, then press **Run** on the solution. The solution applies the grace period before the cap, which is the order the context document specifies.
+
+After you've written your own context document and used it to generate a feature, run your output against these five cases. Then check whether your document, and not your memory, is what got the assistant to the right answer.
+
+> **A note on the code.** The starter and solution were written by hand to show the defect and the fix. They aren't a record of what any assistant produced. Use the cases to check your own generated feature.
+
 ## Check your work
 
 Check your output against these cases. They describe the behavior the grace-period feature should have, using the same fines rule as the module.

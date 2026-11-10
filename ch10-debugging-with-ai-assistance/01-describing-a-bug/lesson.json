@@ -1,0 +1,7 @@
+{
+  "title": "Describing a Bug",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Write a bug report that gives an assistant what it needs to reason about the defect, and separate what you observed from what you concluded.",
+  "prerequisites": ["Summary: Testing with AI Assistance"]
+}

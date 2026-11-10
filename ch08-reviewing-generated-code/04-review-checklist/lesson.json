@@ -1,0 +1,7 @@
+{
+  "title": "A Review Checklist",
+  "runtime": "none",
+  "minutes": 25,
+  "objective": "Use a review checklist that works in any language, record a result for each item with a reason, and tell a useful checklist entry from a box-ticking one.",
+  "prerequisites": ["Common Failure Modes"]
+}

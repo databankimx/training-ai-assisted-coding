@@ -1,0 +1,11 @@
+{
+  "title": "Homework: Review Three Generated Functions",
+  "section": "Homework",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "spoiler": true,
+  "minutes": 60,
+  "objective": "Run three generated functions against a spec, find the defects the harness shows, write a claim for each defect, and write a review note for each function that a team lead could act on.",
+  "prerequisites": ["Code That Passes Every Check and Is Still Wrong"],
+  "expected": "retry \"100, 200, 400\": 100 200 400\nretry \"100, abc\": error\nretry \"100, 200,\": error\nuser age normal: 42\nuser age cancelled: cancelled\ndiscount 1000 at 10: 900\ndiscount 1000 at 0: 1000\ndiscount 1000 at 100: 0"
+}

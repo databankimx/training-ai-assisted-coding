@@ -54,6 +54,18 @@ Here are three examples of a round-three prompt, each adding a different kind of
 
 Run the output against the five cases, and against your own extra case. Note the result of each.
 
+## Run it
+
+The starter is a first-round counter: it's what a one-line prompt often produces, and it splits on spaces only. Its checks run the five cases from the task, plus one with an accented letter. Press **Run** (or F5) and read each line.
+
+Three cases fail. Repeated spaces create empty pieces, so the counts are too high. The empty string counts as one word, because splitting it gives one empty piece, and a string of three spaces counts as four for the same reason. Each failure points to a part of the prompt that was missing: the empty pieces are a missing contract for spaces, and the empty cases are a missing rule for an empty sentence.
+
+Press **Check** on the starter, then press **Run** on the solution. The solution is the round-three counter: runs of letters and digits are words, and it handles every case, including the accented letter.
+
+Use the harness as you tighten your prompt. After each round, run the cases again, and keep the output with the prompt that produced it. Your own prompts won't match the starter's code, and that's the point: the harness checks the behavior, not the wording.
+
+> **A note on the code.** The starter and solution were written by hand to show the failures. They aren't a record of what any assistant produced. Use the harness to check your own outputs.
+
 ## What to hand in
 
 Your file should contain three prompts, three outputs, and three sentences, in that order. Then add one final paragraph that answers two questions. Which round changed the output the most, and which part of the prompt did that change come from? If your round-three output was still wrong on any case, which part of the prompt would you change next?

@@ -1,0 +1,7 @@
+{
+  "title": "Extending Coverage You Wrote",
+  "runtime": "none",
+  "minutes": 25,
+  "objective": "Use an assistant to add cases to a suite you wrote, check that each added case comes from the spec and catches a mutant, and reject the additions that only confirm the code.",
+  "prerequisites": ["Reviewing a Generated Test Suite"]
+}

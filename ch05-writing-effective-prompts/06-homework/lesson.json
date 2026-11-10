@@ -1,9 +1,11 @@
 {
   "title": "Homework: Three Rounds on One Function",
   "section": "Homework",
-  "runtime": "none",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
   "spoiler": true,
   "minutes": 40,
-  "objective": "Write a prompt for a small function, run the output, and tighten the prompt in two rounds, keeping all three prompts and their outputs.",
-  "prerequisites": ["Prompts for Tests and Documentation"]
+  "objective": "Write a prompt for a small function, run the output against the homework cases, and tighten the prompt in two rounds until every case passes.",
+  "prerequisites": ["Prompts for Tests and Documentation"],
+  "expected": "\"The cat sat.\" -> 3 pass\n\"  many   spaces  here \" -> 3 pass\n\"Hello, world!\" -> 2 pass\n\"\" -> 0 pass\n\"   \" -> 0 pass\n\"naïve\" -> 1 pass"
 }

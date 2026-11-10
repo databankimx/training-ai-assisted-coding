@@ -1,0 +1,9 @@
+{
+  "title": "Reading Before Running",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Read a generated change in an order that finds the most defects, write each concern as a claim, and check each claim by running the case that would show it.",
+  "prerequisites": ["Summary: Writing the Spec"],
+  "expected": "missing: error (file not found)\nmalformed: error (line 2 has no equals sign)\nequals: url=a=b"
+}

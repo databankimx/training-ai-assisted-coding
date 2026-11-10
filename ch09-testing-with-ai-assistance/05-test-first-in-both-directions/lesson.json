@@ -1,0 +1,9 @@
+{
+  "title": "Test-First Development in Both Directions",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 30,
+  "objective": "Run prepared tests against a placeholder and watch them fail, then detect a suite whose expectations were changed to match a defect by checking it against the spec.",
+  "prerequisites": ["Extending Coverage You Wrote"],
+  "expected": "test day 3: pass\ntest day 4: pass\ntest day 200: pass\nsuite agrees with spec: yes"
+}

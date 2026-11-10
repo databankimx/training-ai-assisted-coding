@@ -1,0 +1,9 @@
+{
+  "title": "Stale and Invented APIs",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Tell an invented call from a stale one, check whether a call exists in the version you target, and replace each bad call with one that exists.",
+  "prerequisites": ["Reading Before Running"],
+  "expected": "sorted names: Adam, Chen, Mira\nclamped score: 100\ntimestamp is utc: true"
+}

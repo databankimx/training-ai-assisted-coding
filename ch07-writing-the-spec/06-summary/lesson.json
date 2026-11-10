@@ -1,0 +1,7 @@
+{
+  "title": "Summary: Writing the Spec",
+  "runtime": "none",
+  "minutes": 8,
+  "objective": "Review why a written spec beats a long conversation, the six sections of a spec, and how acceptance examples turn a spec into a check.",
+  "prerequisites": ["Homework: A Spec for a Settings Parser"]
+}

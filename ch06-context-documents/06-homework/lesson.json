@@ -1,9 +1,11 @@
 {
   "title": "Homework: A Context Document for an Unfamiliar Module",
   "section": "Homework",
-  "runtime": "none",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
   "spoiler": true,
   "minutes": 45,
-  "objective": "Write a context document for a module you have not seen, use it to generate a small feature, and report where the document helped and where it was missing.",
-  "prerequisites": ["Keeping a Context Document Current"]
+  "objective": "Write a context document for a module you have not seen, use it to generate a grace-period feature, and check the generated feature against the cases the document must support.",
+  "prerequisites": ["Keeping a Context Document Current"],
+  "expected": "days 0 -> 0 pass\ndays 1 -> 0 pass\ndays 4 -> 25 pass\ndays 200 -> 2000 pass\ndays -1 -> error pass"
 }

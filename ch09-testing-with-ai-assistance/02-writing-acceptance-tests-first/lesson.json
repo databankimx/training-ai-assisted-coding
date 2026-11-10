@@ -1,0 +1,7 @@
+{
+  "title": "Writing Acceptance Tests First",
+  "runtime": "none",
+  "minutes": 25,
+  "objective": "Turn an acceptance table into a test suite before the implementation exists, and check that the suite fails before the code is written.",
+  "prerequisites": ["Why Generated Tests Look Finished"]
+}
