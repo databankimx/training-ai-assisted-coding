@@ -136,6 +136,16 @@ function Get-PythonVersion([string]$pythonExe) {
     return $null
 }
 
+# Looks for a real Python 3.12 or later. The Microsoft Store stub on PATH is skipped, because it prints no version.
+function Find-Python {
+    foreach ($candidate in $pythonCandidates) {
+        if ((Test-Path $candidate) -and (Test-PythonAtLeast312 (Get-PythonVersion $candidate))) { return $candidate }
+    }
+    $command = Get-Command python -ErrorAction SilentlyContinue
+    if ($command -and (Test-PythonAtLeast312 (Get-PythonVersion $command.Source))) { return $command.Source }
+    return $null
+}
+
 function Test-PythonAtLeast312([string]$version) {
     if ($version -match "Python 3\.(\d+)") { return ([int]$Matches[1] -ge 12) }
     return $false
@@ -268,12 +278,12 @@ if (Test-DotnetAtLeast10 $sdks) {
     $summary[".NET SDK"] = "missing"
 }
 
-$pythonExe = Find-Program 'python' $pythonCandidates
+$pythonExe = Find-Python
 $pythonVersion = Get-PythonVersion $pythonExe
 if (-not (Test-PythonAtLeast312 $pythonVersion) -and -not $SkipInstall) {
     Write-Host "   Python 3.12 is missing: installing it"
     Invoke-Winget "Python.Python.3.12"
-    $pythonExe = Find-Program 'python' $pythonCandidates
+    $pythonExe = Find-Python
     $pythonVersion = Get-PythonVersion $pythonExe
 }
 if (Test-PythonAtLeast312 $pythonVersion) {
