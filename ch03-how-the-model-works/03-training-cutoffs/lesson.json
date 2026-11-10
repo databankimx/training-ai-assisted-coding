@@ -1,0 +1,9 @@
+{
+  "title": "Training Cutoffs and Versions",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Explain why an assistant's knowledge has a cutoff, run newer and portable forms of the same task, and choose the form your target version supports.",
+  "prerequisites": ["Hallucination: Confident Inventions"],
+  "expected": "Score (portable): 100\nPairs (portable): 1+2, 3+4, 5\nSorted (portable): 1, 2, 3\nOriginal: 3, 1, 2"
+}

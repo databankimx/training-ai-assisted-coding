@@ -1,0 +1,7 @@
+{
+  "title": "When Something Goes Wrong",
+  "runtime": "none",
+  "minutes": 15,
+  "objective": "Recognize an AI-related incident, report it to the right people immediately, and know what to do and not do in the meantime.",
+  "prerequisites": ["Code That Leaves the Building"]
+}

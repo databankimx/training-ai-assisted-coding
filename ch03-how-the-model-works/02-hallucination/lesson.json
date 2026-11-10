@@ -1,0 +1,9 @@
+{
+  "title": "Hallucination: Confident Inventions",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Recognize invented methods in generated code, run them to see the failure, and replace them with real methods after checking the documentation.",
+  "prerequisites": ["Tokens and Context"],
+  "expected": "Sort and take: (empty), Adam, Chen\nRemove empty: Mira, Adam, Chen"
+}

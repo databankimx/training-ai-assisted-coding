@@ -1,0 +1,7 @@
+{
+  "title": "Code That Leaves the Building",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Know what the development rules require before code written for a client is delivered, and where an AI-assisted change fits in that process.",
+  "prerequisites": ["Accounts and Tools"]
+}

@@ -1,0 +1,7 @@
+{
+  "title": "Tokens and Context",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Explain what a token is, what a context window holds, and why a long conversation can lose the details at its beginning.",
+  "prerequisites": ["Summary: Rules of Engagement"]
+}

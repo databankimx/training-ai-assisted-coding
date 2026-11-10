@@ -1,0 +1,9 @@
+{
+  "title": "Formatting Is Not Evidence",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Run a documented function that returns the wrong answer, see why neat formatting proved nothing, and check the function against expected results.",
+  "prerequisites": ["Training Cutoffs and Versions"],
+  "expected": "Documented: -2\nPlain: -2"
+}

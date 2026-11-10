@@ -1,0 +1,11 @@
+{
+  "title": "Homework: The Hallucination Hunt",
+  "section": "Homework",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "spoiler": true,
+  "minutes": 40,
+  "objective": "Run generated code, list every API claim in it, and classify each one as real, invented, or version-dependent, with the check you used.",
+  "prerequisites": ["Formatting Is Not Evidence"],
+  "expected": "Fields: ALPHA, BETA, GAMMA\nCount: 3\nSorted: ALPHA, BETA, GAMMA"
+}

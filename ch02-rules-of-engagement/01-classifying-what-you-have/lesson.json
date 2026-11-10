@@ -1,0 +1,7 @@
+{
+  "title": "Classifying What You Have",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Sort everyday work items into allowed, allowed after removing details, not allowed, or ask first, and give the reason for each.",
+  "prerequisites": ["Summary: First Interaction"]
+}
