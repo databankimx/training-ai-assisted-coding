@@ -181,9 +181,9 @@ Add-FolderToPath $gitExe
 Write-Host "   Git: $gitExe"
 $summary["Git"] = "ok"
 
-if (-not (Test-Path (Join-Path $root "package.json"))) {
+if (-not (Test-Path (Join-Path $root "lesson-runner\package.json"))) {
     # The script is running outside the repository. Clone it, or use the existing clone, then run its copy.
-    if (Test-Path (Join-Path $defaultRepoPath "package.json")) {
+    if (Test-Path (Join-Path $defaultRepoPath "lesson-runner\package.json")) {
         Write-Host "   Using the repository at $defaultRepoPath"
         $repoRoot = $defaultRepoPath
     } else {
