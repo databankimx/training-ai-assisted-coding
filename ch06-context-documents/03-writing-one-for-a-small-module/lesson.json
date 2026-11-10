@@ -1,0 +1,9 @@
+{
+  "title": "Writing One for a Small Module",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 30,
+  "objective": "Run the code produced without a context document to see its unit and type mistakes, compare it with the version written with the document, and revise a document based on what the assistant got wrong.",
+  "prerequisites": ["Anatomy of a Context Document"],
+  "expected": "500 g: 650 cents\n12000 g: 17940 cents"
+}

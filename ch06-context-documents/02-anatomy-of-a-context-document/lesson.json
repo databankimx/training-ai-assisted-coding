@@ -1,0 +1,7 @@
+{
+  "title": "Anatomy of a Context Document",
+  "runtime": "none",
+  "minutes": 25,
+  "objective": "Name the sections of a useful context document, say what each prevents, and tell a useful entry from a vague one.",
+  "prerequisites": ["Why the Assistant Needs Context"]
+}

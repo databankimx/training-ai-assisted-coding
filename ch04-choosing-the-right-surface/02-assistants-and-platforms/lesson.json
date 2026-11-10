@@ -1,0 +1,7 @@
+{
+  "title": "Coding Assistants and AI Platforms",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Tell a coding assistant apart from an AI platform that a product calls at run time, and say why the difference changes the data, review, and approval rules.",
+  "prerequisites": ["The Surfaces"]
+}

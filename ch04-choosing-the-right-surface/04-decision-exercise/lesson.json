@@ -1,0 +1,7 @@
+{
+  "title": "Decision Exercise",
+  "runtime": "none",
+  "minutes": 25,
+  "objective": "Choose a surface for each of five tasks, using the five questions, and justify each choice in terms of the answers.",
+  "prerequisites": ["Choosing Before Prompting"]
+}

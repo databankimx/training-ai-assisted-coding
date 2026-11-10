@@ -1,0 +1,7 @@
+{
+  "title": "Choosing Before Prompting",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Answer a short set of questions about a task before you write a prompt, and use the answers to choose a surface.",
+  "prerequisites": ["Coding Assistants and AI Platforms"]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Homework: A Context Document for an Unfamiliar Module",
+  "section": "Homework",
+  "runtime": "none",
+  "spoiler": true,
+  "minutes": 45,
+  "objective": "Write a context document for a module you have not seen, use it to generate a small feature, and report where the document helped and where it was missing.",
+  "prerequisites": ["Keeping a Context Document Current"]
+}

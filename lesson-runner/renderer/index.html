@@ -97,6 +97,8 @@
       .file-select { margin: 0 4px 0 12px; background: var(--field); color: var(--text); border: 1px solid var(--border); border-radius: 3px; padding: 3px 6px; font-family: Consolas, "Cascadia Mono", monospace; font-size: 12px; }
       .modified { color: #d7ba7d; font-size: 12px; }
       body.light .modified { color: #855f00; }
+      .shadow { margin: 0.6em 0; padding: 10px 14px; overflow-x: auto; background: var(--field); border: 1px solid var(--border); border-radius: 4px; font-family: Consolas, "Cascadia Mono", monospace; font-size: 0.93em; line-height: 1.5; color: var(--text); white-space: pre; }
+      .shadow .ghost { opacity: 0.6; font-style: italic; }
       .source-actions { display: flex; align-items: center; gap: 8px; }
       .code-area { flex: 1; min-height: 0; position: relative; }
       .code-area:has(> #editor[hidden]) { display: none; }
@@ -122,8 +124,8 @@
       .lesson p, .lesson ul, .lesson ol, .lesson table, .lesson blockquote { margin: 0.6em 0; }
       .lesson a { color: var(--accent); }
       .lesson code { font-family: Consolas, "Cascadia Mono", monospace; font-size: 0.93em; background: var(--inline-code-bg); padding: 1px 5px; border-radius: 4px; color: var(--inline-code); }
-      .lesson pre { background: var(--code-bg); padding: 10px 14px; border-radius: 4px; white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: hidden; }
-      .lesson pre code { background: none; padding: 0; color: inherit; }
+      .lesson pre { background: var(--code-bg); padding: 10px 14px; border-radius: 4px; white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: hidden; font-family: Consolas, "Cascadia Mono", monospace; font-size: 0.93em; }
+      .lesson pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
       .lesson th, .lesson td { border: 1px solid var(--border); padding: 4px 10px; text-align: left; }
       .lesson table { border-collapse: collapse; }
       .lesson blockquote { margin-left: 0; padding: 4px 14px; border-left: 3px solid var(--accent); color: var(--muted); }

@@ -1,0 +1,9 @@
+{
+  "title": "Weak and Strong Prompts",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Run a weak version of a function to see its failures, compare it with the strong version written from the six parts, and rewrite a weak prompt using the six parts.",
+  "prerequisites": ["A Prompt Is a Spec"],
+  "expected": "Negatives: -2\nEmpty: rejected"
+}

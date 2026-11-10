@@ -1,0 +1,7 @@
+{
+  "title": "The Follow-Up Cycle",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Refine a prompt in response to a wrong output, change only the part that caused the error, and recognize when to stop refining and write the spec again.",
+  "prerequisites": ["Constraints as Protection"]
+}

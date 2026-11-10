@@ -1,0 +1,7 @@
+{
+  "title": "Why the Assistant Needs Context",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Name what an assistant cannot see about a project, and predict the kinds of mistakes that follow from each gap.",
+  "prerequisites": ["Summary: Writing Effective Prompts"]
+}

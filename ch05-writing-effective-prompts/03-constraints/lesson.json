@@ -1,0 +1,7 @@
+{
+  "title": "Constraints as Protection",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Write constraints that protect a project against the assistant's default choices, and check that each constraint is something the output can be tested against.",
+  "prerequisites": ["Weak and Strong Prompts"]
+}

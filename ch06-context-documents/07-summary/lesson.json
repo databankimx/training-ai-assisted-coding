@@ -1,0 +1,7 @@
+{
+  "title": "Summary: Context Documents",
+  "runtime": "none",
+  "minutes": 8,
+  "objective": "Review what a context document contains, how to give it to an assistant, and how to keep it from going stale.",
+  "prerequisites": ["Homework: A Context Document for an Unfamiliar Module"]
+}

@@ -1,0 +1,7 @@
+{
+  "title": "The Surfaces",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Name the five ways of working with an assistant, and for each one, say what it sees, what it can change, and where its risk lies.",
+  "prerequisites": ["Summary: How the Model Works"]
+}

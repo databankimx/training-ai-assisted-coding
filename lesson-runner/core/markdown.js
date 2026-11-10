@@ -8,12 +8,20 @@
 //   ~~~examples        the same example in each course language, shown as tabs. It holds three fenced blocks,
 //                      labelled csharp, python, and javascript.
 //
+//   ~~~shadow         code in which the text between {{ghost}} and {{/ghost}} is shown faded, like an editor's
+//                      suggestion. The rest is shown normally. Used for completion and inline-edit examples.
 // Everything the renderer adds is escaped, and the renderer attaches no inline scripts or handlers,
 // because the page's Content Security Policy forbids them.
 
 'use strict';
 
 const MarkdownIt = require('markdown-it');
+const { highlightCode } = require('./highlight');
+
+// Private-use characters that mark the start and end of faded text. They pass through the highlighter untouched,
+// and are turned into spans afterwards.
+const GHOST_START = '\uE000';
+const GHOST_END = '\uE001';
 
 const WRONG = '○';
 const RIGHT = '◉';
@@ -133,14 +141,48 @@ function renderExamples(md, source) {
     (language) =>
       `<button type="button" class="language-tab" data-language="${language}">${escape(LABELS[language])}</button>`,
   ).join('');
-  const panes = LANGUAGES.map(
-    (language) =>
-      `<div class="example-pane" data-language="${language}" hidden>\n` +
-      md.render('```' + language + '\n' + variants[language] + '```\n') +
-      `</div>`,
-  ).join('\n');
+  const panes = LANGUAGES.map((language) => {
+    const code = variants[language];
+    const body = code.includes('{{ghost}}')
+      ? renderShadow(md, code, language)
+      : md.render('```' + language + '\n' + code + '```\n');
+    return `<div class="example-pane" data-language="${language}" hidden>\n${body}</div>`;
+  }).join('\n');
 
   return `<div class="examples" data-examples>\n<div class="language-tabs">${tabs}</div>\n${panes}\n</div>\n`;
+}
+
+// Turns the private marker characters into faded spans. The highlighter's output is tags with text between them, so
+// the text is split on the tags and each faded piece is wrapped inside a single run of text. A span never crosses a
+// tag, so the HTML always stays balanced.
+function fadeGhostText(html) {
+  const parts = html.split(/(<[^>]+>)/);
+  let ghost = false;
+  let out = '';
+  parts.forEach((part, index) => {
+    if (index % 2 === 1) {
+      out += part;
+      return;
+    }
+    for (const piece of part.split(/(\uE000|\uE001)/)) {
+      if (piece === GHOST_START) {
+        ghost = true;
+      } else if (piece === GHOST_END) {
+        ghost = false;
+      } else if (piece !== '') {
+        out += ghost ? `<span class="ghost">${piece}</span>` : piece;
+      }
+    }
+  });
+  return out;
+}
+
+// A shadow block: the typed code is normal, and the suggestion is faded. With a language, the code is colored, and the
+// faded parts keep their colors.
+function renderShadow(md, source, language) {
+  const marked = source.replace(/\{\{ghost\}\}/g, GHOST_START).replace(/\{\{\/ghost\}\}/g, GHOST_END);
+  const body = language ? highlightCode(marked, language) : md.utils.escapeHtml(marked);
+  return `<pre class="shadow"><code>${fadeGhostText(body)}</code></pre>\n`;
 }
 
 function createRenderer(options = {}) {
@@ -153,6 +195,7 @@ function createRenderer(options = {}) {
     if (info === 'quiz') return renderQuiz(md, token.content);
     if (info === 'spoiler') return renderSpoiler(md, token.content);
     if (info === 'examples') return renderExamples(md, token.content);
+    if (info === 'shadow') return renderShadow(md, token.content);
     return defaultFence(tokens, index, options, env, self);
   };
 

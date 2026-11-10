@@ -1,0 +1,7 @@
+{
+  "title": "Prompts for Tests and Documentation",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Apply the six parts to a prompt for tests and to a prompt for documentation, and recognize what each needs that a code prompt does not.",
+  "prerequisites": ["The Follow-Up Cycle"]
+}

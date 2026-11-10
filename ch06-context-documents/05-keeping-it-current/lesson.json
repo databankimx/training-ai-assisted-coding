@@ -1,0 +1,7 @@
+{
+  "title": "Keeping a Context Document Current",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Recognize the ways a context document goes stale, and set up a simple habit that catches drift before the assistant acts on it.",
+  "prerequisites": ["Using a Context Document"]
+}

@@ -89,7 +89,7 @@ From Stage 2 on, learners write `SPEC.md` files. Each spec should cover purpose,
 
 ## Chapter outline
 
-The outline below replaces the earlier draft. It keeps the same core topics, reorders them so each builds on the last, and adds the spec and homework arc. Chapter 0 is an introduction. Chapters 1 to 14 are the body of the course. An appendix collects reference material.
+The outline below replaces the earlier draft. It keeps the same core topics, reorders them so each builds on the last, and adds the spec and homework arc. Chapter 0 is an introduction. Chapters 1 to 16 are the body of the course. An appendix collects reference material.
 
 ### Chapter 0: Introduction
 
@@ -239,31 +239,52 @@ Documentation is a draft, not a source of truth.
 
 Homework (Stage 3): document a module from its spec and tests, then check the documentation against the behavior. The learner marks every sentence that the code does not support.
 
-### Chapter 13: Agentic Workflows and Security
+### Chapter 13: Agentic Workflows
 
-Agentic work brings the highest reward and the highest risk, so the security material lives here, alongside the workflow it governs.
+Agentic work brings the highest reward and the highest risk. This chapter covers using agents under supervision. Building them is Chapter 14, and security is Chapter 15.
 
 - 13-01: What makes a task agentic.
 - 13-02: Writing a brief for an agent: scope, constraints, done criteria.
 - 13-03: Checkpoint supervision: plan, review, implement, review, test, review.
 - 13-04: Reading the diff. This is the most important review in an agentic workflow.
 - 13-05: Prompt injection from files and web content, and why agents are particularly exposed.
-- 13-06: Security-sensitive and compliance-sensitive code. Authentication, authorization, cryptography, and regulated logic are written by people, reviewed by specialists, and implemented against the written requirement.
-- 13-07: Dependency hygiene: license vetting, copyleft, and the package-source checks that apply to closed-source commercial software.
-- 13-08: Never feed generated code into a runtime evaluator. The lesson explains the risk: remote code execution by design, no sandbox, no audit trail, and no CI gate. It does not include a working example of the pattern.
-- 13-09: The review process has no AI exception. Team review, standards checks, static analysis, and dependency scanning apply to every change, regardless of origin.
-
 Homework (Stage 4 begins): a staged agentic task on a spec the learner wrote. The learner sets explicit checkpoints, stops at each one to review, and writes a diff review.
 
-### Chapter 14: Knowing When to Stop, and the Capstone
+### Chapter 14: Creating Agents
+
+An agent is a model, a set of tools, and a loop that decides the next step. Learners build a small one in a sandbox, so they see the parts that the security material refers back to.
+
+- 14-01: What an agent is: the model, the tools it can call, and the loop that runs until it stops.
+- 14-02: Defining tools: the name, the inputs, what a tool may and may not do, and why a tool is the real boundary.
+- 14-03: The loop and its stop conditions: step limits, a finished state, and what happens on an error.
+- 14-04: Scope and approval: which actions a human must approve, and how an agent is kept within its task.
+- 14-05: Logging and review: recording every tool call so a person can read what the agent did.
+- 14-06: Never run generated code through the agent. The runtime-evaluation risk applies here most directly, and this step explains why an agent must not do it.
+- 14-07: Build a small agent in a sandbox, with a spec, a tool list, a step limit, and a log, and review its log afterwards.
+
+Homework (Stage 4): build a small agent from a spec the learner wrote, then review its log and write a note on every action that should have needed approval.
+
+### Chapter 15: Security and Compliance
+
+The chapter that covers what can get you in trouble. It builds on Chapter 2 and goes deeper into the specific failure modes.
+
+- 15-01: Security-sensitive code: authentication, authorization, cryptography. These are written by people, and reviewed by specialists.
+- 15-02: Compliance-sensitive logic, such as HIPAA, PCI-DSS, and SOC 2. Implement against the written specification, and have it reviewed against that specification.
+- 15-03: Dependency hygiene for generated code. The license rules in Chapter 2, step 4 apply in full, and agents suggest packages freely, so this step shows where a suggestion is most likely to break them.
+- 15-04: The review process has no AI exception. Team review, standards checks, static analysis, and dependency scanning apply to every change, regardless of origin. This step shows how an agent's changes reach those checks.
+- 15-05: Never feed generated code into a runtime evaluator. The lesson explains the risk: remote code execution by design, no sandbox, no audit trail, and no CI gate. It does not include a working example of the pattern.
+
+Homework (Stage 4): a security review of a generated change, with each finding classified and a fix written by the learner.
+
+### Chapter 16: Knowing When to Stop, and the Capstone
 
 The judgment chapter, followed by the course's final project.
 
-- 14-01: Where assistance is most valuable: familiar domains, quick validation, cheap fixes.
-- 14-02: Stop conditions: repeated failure to converge, editing more than writing, not understanding the output, deadline pressure.
-- 14-03: The handoff from prototype to production.
-- 14-04: Skill atrophy and deliberate unassisted practice.
-- 14-05: A decision framework to use before each task.
+- 16-01: Where assistance is most valuable: familiar domains, quick validation, cheap fixes.
+- 16-02: Stop conditions: repeated failure to converge, editing more than writing, not understanding the output, deadline pressure.
+- 16-03: The handoff from prototype to production.
+- 16-04: Skill atrophy and deliberate unassisted practice.
+- 16-05: A decision framework to use before each task.
 
 Capstone (Stage 4): a larger specification, implemented across two languages with a context document, a spec, generated code, a test suite, a debugging session, a refactoring pass, documentation, and a written review. The learner submits the spec, the prompts used, the generated outputs, the review notes, and a short reflection on where the assistant helped and where it did not. The capstone is graded against behavior and against the quality of the learner's review, not against the amount of code produced.
 

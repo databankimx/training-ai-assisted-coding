@@ -1,0 +1,7 @@
+{
+  "title": "Using a Context Document",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Give a context document to an assistant by pasting or attaching it, know how long its influence lasts, and place it so the assistant reads it before the request.",
+  "prerequisites": ["Writing One for a Small Module"]
+}

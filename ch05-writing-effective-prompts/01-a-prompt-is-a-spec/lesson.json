@@ -1,0 +1,7 @@
+{
+  "title": "A Prompt Is a Spec",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Name the parts a useful prompt should carry, and say what each part prevents.",
+  "prerequisites": ["Summary: Choosing the Right Surface"]
+}
