@@ -1,245 +1,398 @@
-<#
-.SYNOPSIS
-  Sets up the AI-assisted coding course on this computer.
+# setup.ps1
+#
+# Prepares training-ai-assisted-coding for the lesson runner. It can be run from anywhere:
+#   0. Checks Git. If this script isn't inside the repository, it clones the repository into
+#      C:\Development\training\training-ai-assisted-coding (or uses the clone already there), then runs the cloned copy
+#      of this script, so every later step uses the repository's own files.
+#   1. Checks Node.js 24 or later.
+#   2. Checks the .NET SDK 10 or later (for the C# lessons) and Python 3.12 or later (for the Python lessons).
+#   3. Checks the C++ Build Tools. They are needed when Electron's download fails and the native modules must be rebuilt.
+#   4. Installs the npm packages exactly as recorded in package-lock.json (npm ci), and makes sure Electron's binary is
+#      present. If it isn't, the download is retried after rebuilding the native modules with the C++ environment.
+#   5. Runs the lesson runner's tests.
+#   6. Checks Visual Studio Code.
+#
+# Anything missing is installed with winget. Use -SkipInstall to only check. Installing the C++ Build Tools needs an
+# elevated (Administrator) PowerShell. Safe to run again: anything already in place is skipped.
+#
+# Run from anywhere with:
+#   powershell -NoProfile -ExecutionPolicy Bypass -File .\setup.ps1
 
-.DESCRIPTION
-  1. Installs, with winget, anything that is missing: Git, Node.js (24 or later), Python (3.12 or later), the .NET SDK
-     (10 or later), and Visual Studio Code. Anything already installed at a suitable version is left alone.
-  2. Creates C:\Development\training if it doesn't exist.
-  3. Clones the course repository into C:\Development\training\training-ai-assisted-coding, or updates it if it is
-     already there.
-  4. Installs the lesson runner's packages and runs its tests.
-
-  When it finishes, open a terminal in C:\Development\training\training-ai-assisted-coding\lesson-runner and run:
-      npm start
-
-  The script does not sign anyone in to GitHub Copilot. That sign-in uses the learner's company account, and the
-  Chapter 0 lesson explains it.
-
-.PARAMETER Branch
-  The branch to clone or update. Defaults to main.
-
-.PARAMETER Root
-  The folder that holds the training folder. Defaults to C:\Development.
-
-.PARAMETER SkipTests
-  Skips the lesson runner's tests after the packages are installed.
-
-.EXAMPLE
-  powershell -NoProfile -ExecutionPolicy Bypass -File .\setup.ps1
-#>
-[CmdletBinding()]
 param(
-  [string]$Branch = 'main',
-  [string]$Root = 'C:\Development',
-  [switch]$SkipTests
+    [switch]$SkipInstall,
+    [string]$RepoUrl = "https://github.com/databankimx/training-ai-assisted-coding.git",
+    [string]$Branch = "main"
 )
 
-$ErrorActionPreference = 'Stop'
+$ErrorActionPreference = "Stop"
+$root = $PSScriptRoot
+Set-Location $root
 
-$RepoUrl = 'https://github.com/databankimx/training-ai-assisted-coding.git'
-$TrainingDir = Join-Path $Root 'training'
-$RepoDir = Join-Path $TrainingDir 'training-ai-assisted-coding'
-$RunnerDir = Join-Path $RepoDir 'lesson-runner'
+$defaultRepoPath = "C:\Development\training\training-ai-assisted-coding"
+$requiredNodeMajor = 24
+$summary = [ordered]@{}
 
-# ---- Helpers ----
-
-function Write-Step([string]$Text) {
-  Write-Host ''
-  Write-Host "==> $Text" -ForegroundColor Cyan
+function Write-Step([string]$title) {
+    Write-Host ""
+    Write-Host "== $title ==" -ForegroundColor Cyan
 }
 
-function Write-Note([string]$Text) {
-  Write-Host "    $Text" -ForegroundColor DarkGray
+function Stop-Setup([string]$message) {
+    Write-Host ""
+    Write-Host "SETUP STOPPED: $message" -ForegroundColor Red
+    Write-Host "Fix the problem above, then run this script again. Steps already done are skipped."
+    exit 1
 }
 
-# Runs a command and stops the script if it exits with an error.
-function Invoke-Checked {
-  param([string]$Description, [scriptblock]$Command)
-  & $Command
-  if ($LASTEXITCODE -ne 0) {
-    throw "$Description failed (exit code $LASTEXITCODE). Read the messages above, fix the problem, and run the script again."
-  }
+function Add-Warning([string]$message) {
+    Write-Host "   WARNING: $message" -ForegroundColor Yellow
 }
 
-# Reloads the PATH from the registry, so a tool installed a moment ago can be found without a new window.
-function Update-SessionPath {
-  $machine = [Environment]::GetEnvironmentVariable('Path', 'Machine')
-  $user = [Environment]::GetEnvironmentVariable('Path', 'User')
-  $env:Path = "$machine;$user"
+function Test-Administrator {
+    $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $principal = New-Object Security.Principal.WindowsPrincipal($identity)
+    return $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 }
 
-function Test-CommandExists([string]$Name) {
-  return [bool](Get-Command $Name -ErrorAction SilentlyContinue)
-}
-
-# Installs a package with winget. A fresh winget package may need a new window before its command is found.
-function Install-WingetPackage {
-  param([string]$Id, [string]$Label, [string[]]$ExtraArguments = @())
-  Write-Note "Installing $Label with winget ($Id)..."
-  $arguments = @('install', '--id', $Id, '--exact', '--source', 'winget',
-                 '--accept-package-agreements', '--accept-source-agreements', '--silent') + $ExtraArguments
-  & winget @arguments
-  # winget returns 0 on success. It also returns a code when the package is already installed, which is fine.
-  if ($LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne -1978335189) {
-    throw "winget could not install $Label (exit code $LASTEXITCODE)."
-  }
-  Update-SessionPath
-}
-
-function Get-Version([string]$Command, [string[]]$Arguments) {
-  try {
-    $output = & $Command @Arguments 2>$null
-    if ($LASTEXITCODE -ne 0 -or -not $output) { return $null }
-    return ($output | Select-Object -First 1)
-  } catch {
-    return $null
-  }
-}
-
-# ---- Step 0: winget ----
-
-Write-Step 'Checking winget'
-if (-not (Test-CommandExists 'winget')) {
-  throw 'winget is not available. Install "App Installer" from the Microsoft Store, then run this script again.'
-}
-Write-Note 'winget is available.'
-
-# ---- Step 1: tools ----
-
-Write-Step 'Checking Git'
-if (Test-CommandExists 'git') {
-  Write-Note (Get-Version 'git' @('--version'))
-} else {
-  Install-WingetPackage -Id 'Git.Git' -Label 'Git'
-  if (-not (Test-CommandExists 'git')) {
-    throw 'Git was installed, but the git command is not found yet. Open a new terminal and run this script again.'
-  }
-}
-
-Write-Step 'Checking Node.js (24 or later)'
-$nodeVersion = $null
-if (Test-CommandExists 'node') {
-  $nodeVersion = Get-Version 'node' @('--version')
-}
-if (-not $nodeVersion -or [version]($nodeVersion.TrimStart('v')) -lt [version]'24.0.0') {
-  Install-WingetPackage -Id 'OpenJS.NodeJS.LTS' -Label 'Node.js LTS'
-  $nodeVersion = Get-Version 'node' @('--version')
-}
-if (-not $nodeVersion -or [version]($nodeVersion.TrimStart('v')) -lt [version]'24.0.0') {
-  throw "Node.js 24 or later is needed, and this computer reports '$nodeVersion'. Install Node.js 24 by hand, open a new terminal, and run this script again."
-}
-Write-Note "Node.js $nodeVersion"
-
-Write-Step 'Checking Python (3.12 or later)'
-$pythonVersion = $null
-if (Test-CommandExists 'python') {
-  # On a fresh computer, 'python' can be a Microsoft Store stub that prints nothing useful. Only a real version counts.
-  $pythonVersion = Get-Version 'python' @('--version')
-  if ($pythonVersion -notmatch 'Python 3\.(\d+)') { $pythonVersion = $null }
-}
-$pythonOk = $false
-if ($pythonVersion -and $pythonVersion -match 'Python 3\.(\d+)') {
-  $pythonOk = [int]$Matches[1] -ge 12
-}
-if (-not $pythonOk) {
-  Install-WingetPackage -Id 'Python.Python.3.12' -Label 'Python 3.12'
-  $pythonVersion = Get-Version 'python' @('--version')
-}
-Write-Note "$pythonVersion"
-
-Write-Step 'Checking the .NET SDK (10 or later)'
-$dotnetOk = $false
-if (Test-CommandExists 'dotnet') {
-  $sdks = & dotnet --list-sdks 2>$null
-  $dotnetOk = [bool]($sdks | Where-Object { $_ -match '^(1[0-9]|[2-9][0-9])\.' })
-}
-if (-not $dotnetOk) {
-  Install-WingetPackage -Id 'Microsoft.DotNet.SDK.10' -Label '.NET 10 SDK'
-  $sdks = & dotnet --list-sdks 2>$null
-  $dotnetOk = [bool]($sdks | Where-Object { $_ -match '^(1[0-9]|[2-9][0-9])\.' })
-}
-if (-not $dotnetOk) {
-  throw '.NET 10 SDK is needed. Install it by hand, open a new terminal, and run this script again.'
-}
-Write-Note (($sdks | Select-Object -Last 1) -replace '\s*\[.*$', '')
-
-Write-Step 'Checking Visual Studio Code'
-$codeExe = @(
-  (Join-Path $env:LOCALAPPDATA 'Programs\Microsoft VS Code\Code.exe'),
-  (Join-Path $env:ProgramFiles 'Microsoft VS Code\Code.exe')
-) | Where-Object { Test-Path $_ } | Select-Object -First 1
-if (-not $codeExe) {
-  Install-WingetPackage -Id 'Microsoft.VisualStudioCode' -Label 'Visual Studio Code' -ExtraArguments @('--scope', 'user')
-  $codeExe = @(
-    (Join-Path $env:LOCALAPPDATA 'Programs\Microsoft VS Code\Code.exe'),
-    (Join-Path $env:ProgramFiles 'Microsoft VS Code\Code.exe')
-  ) | Where-Object { Test-Path $_ } | Select-Object -First 1
-}
-if (-not $codeExe) {
-  throw 'Visual Studio Code is needed, but it could not be found after installing it. Install it by hand and run this script again.'
-}
-Write-Note $codeExe
-
-# ---- Step 2: folders ----
-
-Write-Step "Creating $TrainingDir if needed"
-New-Item -ItemType Directory -Force -Path $TrainingDir | Out-Null
-Write-Note 'Folder is ready.'
-
-# ---- Step 3: the repository ----
-
-Write-Step "Getting the course repository ($Branch)"
-if (Test-Path (Join-Path $RepoDir '.git')) {
-  Write-Note "The repository already exists at $RepoDir. Updating it."
-  Invoke-Checked 'git fetch' { git -C $RepoDir fetch origin }
-  Invoke-Checked "git checkout $Branch" { git -C $RepoDir checkout $Branch }
-  Invoke-Checked "git pull $Branch" { git -C $RepoDir pull --ff-only origin $Branch }
-} elseif (Test-Path $RepoDir) {
-  throw "$RepoDir exists but is not a git repository. Move or rename that folder, then run this script again."
-} else {
-  Invoke-Checked 'git clone' { git clone --branch $Branch $RepoUrl $RepoDir }
-}
-
-# ---- Step 4: build the lesson runner ----
-
-Write-Step 'Installing the lesson runner packages'
-if (-not (Test-Path (Join-Path $RunnerDir 'package.json'))) {
-  throw "The lesson runner was not found at $RunnerDir. Check that the branch '$Branch' contains lesson-runner."
-}
-Push-Location $RunnerDir
-try {
-  if (Test-Path 'package-lock.json') {
-    Invoke-Checked 'npm ci' { npm.cmd ci }
-  } else {
-    Invoke-Checked 'npm install' { npm.cmd install }
-  }
-
-  if ($SkipTests) {
-    Write-Note 'Skipping the tests (-SkipTests).'
-  } else {
-    Write-Step 'Running the lesson runner tests'
-    npm.cmd test
-    if ($LASTEXITCODE -ne 0) {
-      Write-Host '    The tests did not all pass. The runner may still start, but tell the course owner.' -ForegroundColor Yellow
-    } else {
-      Write-Note 'All tests passed.'
+function Invoke-Winget([string]$id) {
+    if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
+        Stop-Setup "winget is not available. Install 'App Installer' from the Microsoft Store, or install $id by hand."
     }
-  }
-} finally {
-  Pop-Location
+    Write-Host "   winget install -e --id $id" -ForegroundColor Gray
+    & winget install -e --id $id --silent --accept-package-agreements --accept-source-agreements
+    # 0 = installed. -1978335189 = already installed, which is fine here. 3010 = installed, and a restart is needed.
+    if ($LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne -1978335189 -and $LASTEXITCODE -ne 3010) {
+        Stop-Setup "winget could not install $id (exit code $LASTEXITCODE)."
+    }
 }
 
-# ---- Done ----
+# Finds a program on PATH, or in the folder it installs to. A program installed in this session isn't on PATH
+# until a new window opens, so the usual folders are checked too.
+function Find-Program([string]$CommandName, [string[]]$Candidates) {
+    $command = Get-Command $CommandName -ErrorAction SilentlyContinue
+    if ($command) { return $command.Source }
+    foreach ($candidate in $Candidates) {
+        if ($candidate -and (Test-Path $candidate)) { return $candidate }
+    }
+    return $null
+}
 
-Write-Host ''
-Write-Host 'Setup is complete.' -ForegroundColor Green
-Write-Host ''
-Write-Host 'To start the lesson runner:' -ForegroundColor Green
-Write-Host "    cd `"$RunnerDir`""
-Write-Host '    npm start'
-Write-Host ''
-Write-Host 'To open the course in Visual Studio Code:' -ForegroundColor Green
-Write-Host "    & `"$codeExe`" `"$RepoDir`""
-Write-Host ''
-Write-Host 'Chapter 0 explains how to sign in to GitHub Copilot with your company account.' -ForegroundColor DarkGray
+function Add-FolderToPath([string]$exePath) {
+    $folder = Split-Path $exePath -Parent
+    if ($env:Path -notlike "*$folder*") { $env:Path = "$folder;$env:Path" }
+}
+
+function Get-VisualStudioInstallPath {
+    # vswhere finds Visual Studio installations. Only one with the C++ compiler component counts.
+    $vswhere = Join-Path ${env:ProgramFiles(x86)} "Microsoft Visual Studio\Installer\vswhere.exe"
+    if (-not (Test-Path $vswhere)) { return $null }
+    $path = & $vswhere -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -latest -property installationPath 2>$null
+    if ($path) { return ($path | Select-Object -First 1).Trim() }
+    return $null
+}
+
+function Test-BuildTools {
+    return [bool](Get-VisualStudioInstallPath)
+}
+
+function Install-BuildTools {
+    if (-not (Test-Administrator)) {
+        Stop-Setup "The C++ Build Tools need an elevated PowerShell. Open PowerShell as Administrator, and run this script again."
+    }
+    Write-Host "   Installing Visual Studio Build Tools with the C++ workload."
+    Write-Host "   This downloads about 4 to 5 GB and may take several minutes."
+    $override = "--quiet --wait --norestart --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended"
+    Write-Host "   winget install --id Microsoft.VisualStudio.BuildTools --override ""$override""" -ForegroundColor Gray
+    & winget install --id Microsoft.VisualStudio.BuildTools -e --accept-package-agreements --accept-source-agreements --override $override
+    # 0 = success, 3010 = success but a restart is needed, -1978335189 = already installed.
+    if ($LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne 3010 -and $LASTEXITCODE -ne -1978335189) {
+        Stop-Setup "winget could not install the C++ Build Tools (exit code $LASTEXITCODE)."
+    }
+    Start-Sleep -Seconds 5
+    return (Test-BuildTools)
+}
+
+# Native modules are compiled with the C++ compiler, which needs the Visual Studio environment variables.
+# vcvars64.bat sets them, and this function copies the result into the current PowerShell session.
+function Import-BuildToolsEnvironment {
+    $install = Get-VisualStudioInstallPath
+    if (-not $install) { return $false }
+    $vcvars = Join-Path $install "VC\Auxiliary\Build\vcvars64.bat"
+    if (-not (Test-Path $vcvars)) { return $false }
+    $environmentLines = cmd /c "`"$vcvars`" >nul 2>&1 && set"
+    foreach ($line in $environmentLines) {
+        if ($line -match "^([^=]+)=(.*)$") {
+            Set-Item -Path "env:$($Matches[1])" -Value $Matches[2]
+        }
+    }
+    return $true
+}
+
+function Get-PythonVersion([string]$pythonExe) {
+    # The Microsoft Store can leave a 'python' stub that prints nothing useful. Only a real version counts.
+    if (-not $pythonExe) { return $null }
+    $version = (& $pythonExe --version 2>&1 | Out-String).Trim()
+    if ($version -match "Python 3\.(\d+)") { return $version }
+    return $null
+}
+
+function Test-PythonAtLeast312([string]$version) {
+    if ($version -match "Python 3\.(\d+)") { return ([int]$Matches[1] -ge 12) }
+    return $false
+}
+
+function Get-DotnetSdks([string]$dotnetExe) {
+    if (-not $dotnetExe) { return @() }
+    return @(& $dotnetExe --list-sdks 2>$null)
+}
+
+function Test-DotnetAtLeast10($sdks) {
+    return [bool]($sdks | Where-Object { $_ -match '^(1[0-9]|[2-9][0-9])\.' })
+}
+
+$gitCandidates = @("C:\Program Files\Git\cmd\git.exe")
+$nodeCandidates = @("C:\Program Files\nodejs\node.exe")
+$dotnetCandidates = @("C:\Program Files\dotnet\dotnet.exe")
+$pythonCandidates = @(
+    (Join-Path $env:LOCALAPPDATA "Programs\Python\Python312\python.exe"),
+    "C:\Program Files\Python312\python.exe"
+)
+$codeCandidates = @(
+    (Join-Path $env:LOCALAPPDATA "Programs\Microsoft VS Code\Code.exe"),
+    "C:\Program Files\Microsoft VS Code\Code.exe"
+)
+
+Write-Host ""
+Write-Host "training-ai-assisted-coding setup" -ForegroundColor Yellow
+
+# 0. Git and the repository ------------------------------------------------------------------------------
+
+Write-Step "0. Git and the repository"
+
+$gitExe = Find-Program 'git' $gitCandidates
+if (-not $gitExe) {
+    if ($SkipInstall) { Stop-Setup "Git isn't installed. Install Git from https://git-scm.com, or run this script without -SkipInstall." }
+    Write-Host "   Git is missing: installing it"
+    Invoke-Winget "Git.Git"
+    $gitExe = Find-Program 'git' $gitCandidates
+    if (-not $gitExe) { Stop-Setup "Git was installed, but git.exe can't be found. Open a new PowerShell window and run this script again." }
+}
+Add-FolderToPath $gitExe
+Write-Host "   Git: $gitExe"
+$summary["Git"] = "ok"
+
+if (-not (Test-Path (Join-Path $root "package.json"))) {
+    # The script is running outside the repository. Clone it, or use the existing clone, then run its copy.
+    if (Test-Path (Join-Path $defaultRepoPath "package.json")) {
+        Write-Host "   Using the repository at $defaultRepoPath"
+        $repoRoot = $defaultRepoPath
+    } else {
+        Write-Host "   Cloning $RepoUrl ($Branch) into $defaultRepoPath"
+        New-Item -ItemType Directory -Force -Path (Split-Path $defaultRepoPath -Parent) | Out-Null
+        & $gitExe clone --branch $Branch $RepoUrl $defaultRepoPath
+        if ($LASTEXITCODE -ne 0) {
+            Stop-Setup "git clone failed (exit code $LASTEXITCODE). Check the address, and your access to the repository."
+        }
+        $repoRoot = $defaultRepoPath
+    }
+    $childScript = Join-Path $repoRoot "setup.ps1"
+    if (-not (Test-Path $childScript)) {
+        Stop-Setup "The repository at $repoRoot has no setup.ps1. Check that the branch '$Branch' is the right one."
+    }
+    Write-Host "   Continuing from the repository's own copy of this script."
+    $childParams = @{}
+    if ($SkipInstall) { $childParams["SkipInstall"] = $true }
+    & $childScript @childParams
+    exit $LASTEXITCODE
+}
+
+if (-not $root.StartsWith("C:\Development\", [StringComparison]::OrdinalIgnoreCase)) {
+    # The repository should live under C:\Development. Security software may remove programs built elsewhere.
+    Add-Warning "the repository is at $root, not under C:\Development. Move it there, then run this script again."
+}
+$summary["Repository"] = $root
+
+# 1. Node.js ---------------------------------------------------------------------------------------------
+
+Write-Step "1. Node.js $requiredNodeMajor or later"
+
+$nodeExe = Find-Program 'node' $nodeCandidates
+if (-not $nodeExe -and -not $SkipInstall) {
+    Write-Host "   Node.js is missing: installing the LTS release"
+    Invoke-Winget "OpenJS.NodeJS.LTS"
+    $nodeExe = Find-Program 'node' $nodeCandidates
+}
+if (-not $nodeExe) {
+    Stop-Setup "Node.js isn't installed. Run this script without -SkipInstall, or install Node.js $requiredNodeMajor or later from https://nodejs.org."
+}
+
+# The folder goes first on PATH for this script, and for the npm command it starts.
+Add-FolderToPath $nodeExe
+$nodeDir = Split-Path $nodeExe -Parent
+
+$nodeVersion = (& $nodeExe --version | Select-Object -First 1).Trim()
+if ($nodeVersion -match "^v(\d+)\.") {
+    $nodeMajor = [int]$Matches[1]
+} else {
+    Stop-Setup "Couldn't read the Node.js version: $nodeVersion"
+}
+if ($nodeMajor -lt $requiredNodeMajor) {
+    Stop-Setup "Node.js $nodeVersion was found, but the course needs Node.js $requiredNodeMajor or later. Install a current LTS release from https://nodejs.org, then run this script again."
+}
+Write-Host "   Node.js $nodeVersion in $nodeDir"
+$summary["Node.js"] = $nodeVersion
+
+$npmCmd = Join-Path $nodeDir "npm.cmd"
+if (-not (Test-Path $npmCmd)) {
+    Stop-Setup "npm wasn't found next to Node.js at $npmCmd. Reinstall Node.js, then run this script again."
+}
+
+# 2. Language tools for the lessons -------------------------------------------------------------------------
+
+Write-Step "2. .NET SDK 10 (C# lessons) and Python 3.12 (Python lessons)"
+
+$dotnetExe = Find-Program 'dotnet' $dotnetCandidates
+$sdks = Get-DotnetSdks $dotnetExe
+if (-not (Test-DotnetAtLeast10 $sdks) -and -not $SkipInstall) {
+    Write-Host "   .NET 10 SDK is missing: installing it"
+    Invoke-Winget "Microsoft.DotNet.SDK.10"
+    $dotnetExe = Find-Program 'dotnet' $dotnetCandidates
+    $sdks = Get-DotnetSdks $dotnetExe
+}
+if (Test-DotnetAtLeast10 $sdks) {
+    Add-FolderToPath $dotnetExe
+    Write-Host "   .NET SDK: $(($sdks | Select-Object -Last 1) -replace '\s*\[.*$', '')"
+    $summary[".NET SDK"] = "ok"
+} else {
+    Add-Warning ".NET 10 SDK not found. The C# lessons need it. Install it from https://dotnet.microsoft.com, or run this script without -SkipInstall."
+    $summary[".NET SDK"] = "missing"
+}
+
+$pythonExe = Find-Program 'python' $pythonCandidates
+$pythonVersion = Get-PythonVersion $pythonExe
+if (-not (Test-PythonAtLeast312 $pythonVersion) -and -not $SkipInstall) {
+    Write-Host "   Python 3.12 is missing: installing it"
+    Invoke-Winget "Python.Python.3.12"
+    $pythonExe = Find-Program 'python' $pythonCandidates
+    $pythonVersion = Get-PythonVersion $pythonExe
+}
+if (Test-PythonAtLeast312 $pythonVersion) {
+    Add-FolderToPath $pythonExe
+    Write-Host "   $pythonVersion in $(Split-Path $pythonExe -Parent)"
+    $summary["Python"] = "ok"
+} else {
+    Add-Warning "Python 3.12 or later not found. The Python lessons need it. Install it from https://python.org, or run this script without -SkipInstall."
+    $summary["Python"] = "missing"
+}
+
+# 3. C++ Build Tools ---------------------------------------------------------------------------------------
+
+Write-Step "3. C++ Build Tools"
+
+$hasBuildTools = Test-BuildTools
+if (-not $hasBuildTools -and -not $SkipInstall) {
+    Write-Host "   C++ Build Tools not found. They are needed to rebuild native modules if Electron's download fails."
+    $hasBuildTools = Install-BuildTools
+}
+if ($hasBuildTools) {
+    Write-Host "   C++ Build Tools found"
+    $summary["C++ Build Tools"] = "ok"
+} else {
+    Stop-Setup "The C++ Build Tools aren't installed. Run this script as Administrator without -SkipInstall, or install 'Visual Studio Build Tools' with the 'Desktop development with C++' workload by hand."
+}
+
+# 4. npm packages and Electron ----------------------------------------------------------------------------
+
+Write-Step "4. npm packages (from package-lock.json)"
+Set-Location (Join-Path $root "lesson-runner")
+& $npmCmd ci
+if ($LASTEXITCODE -ne 0) {
+    Stop-Setup "npm ci failed (exit code $LASTEXITCODE). Check the messages above, and your network access to the npm registry."
+}
+$summary["npm packages"] = "ok"
+
+Write-Step "4b. Electron binary"
+$electronExe = Join-Path (Get-Location) "node_modules\electron\dist\electron.exe"
+$electronInstall = Join-Path (Get-Location) "node_modules\electron\install.js"
+
+if (-not (Test-Path $electronExe)) {
+    Write-Host "   Electron binary not found. Downloading it."
+    if (-not (Test-Path $electronInstall)) {
+        Stop-Setup "Electron's install.js is missing. Check the messages from npm ci above."
+    }
+    & $nodeExe $electronInstall
+    $firstAttempt = $LASTEXITCODE
+
+    if ($firstAttempt -ne 0 -or -not (Test-Path $electronExe)) {
+        # A known npm problem (npm bug 4828) can leave an optional native package unbuilt. Rebuilding with the compiler
+        # environment loaded usually fixes it, and then the download is retried.
+        Write-Host "   The download failed. Rebuilding native modules with the C++ environment, then trying again."
+        if (Import-BuildToolsEnvironment) {
+            Write-Host "   C++ environment loaded for this session"
+        } else {
+            Add-Warning "The C++ environment could not be loaded, so the rebuild may fail."
+        }
+        & $npmCmd rebuild
+        if ($LASTEXITCODE -ne 0) {
+            Write-Host "   npm rebuild reported problems, so the retry below decides the outcome." -ForegroundColor Yellow
+        }
+
+        & $nodeExe $electronInstall
+        if ($LASTEXITCODE -ne 0) {
+            Stop-Setup "Electron's binary still won't download (exit code $LASTEXITCODE). Check network access to github.com, and that the C++ Build Tools are installed."
+        }
+    }
+}
+
+if (Test-Path $electronExe) {
+    Write-Host "   Electron binary ready"
+    $summary["Electron binary"] = "ok"
+} else {
+    Stop-Setup "Electron's binary is still missing after the download. Run this script again, or check the messages above."
+}
+
+# 5. Tests -------------------------------------------------------------------------------------------------
+
+Write-Step "5. Lesson runner tests"
+& $npmCmd test
+if ($LASTEXITCODE -ne 0) {
+    Stop-Setup "The lesson runner's tests failed. Check the messages above, then run this script again."
+}
+$summary["Tests"] = "ok"
+
+# 6. VS Code -----------------------------------------------------------------------------------------------
+
+Write-Step "6. Visual Studio Code"
+$codeExe = Find-Program 'code' $codeCandidates
+if (-not $codeExe -and -not $SkipInstall) {
+    Write-Host "   Visual Studio Code is missing: installing it"
+    Invoke-Winget "Microsoft.VisualStudioCode"
+    $codeExe = Find-Program 'code' $codeCandidates
+}
+if ($codeExe) {
+    Write-Host "   Found VS Code at $codeExe"
+    $summary["VS Code"] = "ok"
+} else {
+    Add-Warning "Visual Studio Code wasn't found. Install it from https://code.visualstudio.com, then run this script again."
+    $summary["VS Code"] = "missing"
+}
+
+Set-Location $root
+
+Write-Step "Summary"
+foreach ($item in $summary.GetEnumerator()) {
+    Write-Host ("   {0,-20} {1}" -f $item.Key, $item.Value)
+}
+
+Write-Host ""
+Write-Host "Setup finished." -ForegroundColor Green
+Write-Host ""
+Write-Host "To start the lesson runner:" -ForegroundColor Green
+Write-Host "   cd `"$root\lesson-runner`""
+Write-Host "   npm start"
+Write-Host ""
+Write-Host "To open the course in Visual Studio Code:" -ForegroundColor Green
+Write-Host "   cd `"$root`""
+Write-Host "   code ."
+Write-Host ""
+Write-Host "Chapter 0 explains how to sign in to GitHub Copilot with your company account." -ForegroundColor DarkGray
