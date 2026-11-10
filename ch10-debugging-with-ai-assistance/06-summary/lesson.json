@@ -1,0 +1,7 @@
+{
+  "title": "Summary: Debugging with AI Assistance",
+  "runtime": "none",
+  "minutes": 8,
+  "objective": "Review how to describe a bug, read output, test a proposed fix, and find the invariant a fix relies on.",
+  "prerequisites": ["Homework: Debugging a Misleading Symptom"]
+}

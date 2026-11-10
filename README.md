@@ -120,7 +120,7 @@ Each step's sample solution is in the same folder as its starter. Read the lesso
 
 The runner runs Python, C#, and JavaScript only when the matching tool is installed. A missing tool hides its tab rather than failing.
 
-> A setup script that installs these tools for you is planned. It will be tested on a clean machine before release.
+> `setup.ps1` installs these tools with winget, clones the course, and installs the lesson runner's packages. Run it with `powershell -NoProfile -ExecutionPolicy Bypass -File .\setup.ps1`, then `npm start` in `lesson-runner`.
 
 ---
 

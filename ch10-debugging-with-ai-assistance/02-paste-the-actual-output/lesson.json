@@ -1,0 +1,9 @@
+{
+  "title": "Pasting the Actual Output",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 20,
+  "objective": "Run a program that shows a bug, copy its actual output exactly into a report, and compare the output with the expected result to find the line that differs.",
+  "prerequisites": ["Describing a Bug"],
+  "expected": "page 0: 1 2 3\npage 1: 4 5 6\npage 2: 7\ntotal shown: 7 of 7"
+}
