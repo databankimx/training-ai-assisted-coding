@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "electron .",
-    "test": "node --test test/catalog.test.js test/markdown.test.js test/state.test.js test/window-state.test.js test/run.test.js test/highlight.test.js"
+    "test": "node --test test/catalog.test.js test/markdown.test.js test/state.test.js test/window-state.test.js test/run.test.js test/highlight.test.js test/check.test.js"
   },
   "dependencies": {
     "highlight.js": "^11.10.0",

@@ -34,11 +34,13 @@
     solutionReasoning: document.getElementById('solution-reasoning'),
     solutionsToggle: document.getElementById('solutions-toggle'),
     resetSource: document.getElementById('reset-source'),
+    modified: document.getElementById('modified'),
     noCode: document.getElementById('no-code'),
     noToolchain: document.getElementById('no-toolchain'),
     output: document.getElementById('output'),
     run: document.getElementById('run'),
     stopRun: document.getElementById('stop-run'),
+    check: document.getElementById('check'),
     previous: document.getElementById('previous'),
     previousHint: document.getElementById('previous-hint'),
     next: document.getElementById('next'),
@@ -303,6 +305,7 @@
   function setRunButtonsVisible(visible) {
     ui.run.hidden = !visible;
     ui.stopRun.hidden = !visible;
+    ui.check.hidden = !visible;
   }
 
   // Sets up the Source tab for a lesson. A step without code shows a note, and a code step shows its editor.
@@ -313,6 +316,7 @@
     ui.sourceLanguages.replaceChildren();
     ui.solutionsToggle.hidden = !hasCode;
     ui.resetSource.hidden = !hasCode;
+    ui.modified.hidden = true;
     setRunButtonsVisible(hasCode);
     ui.editor.hidden = true;
     ui.promptView.hidden = true;
@@ -408,6 +412,7 @@
       ui.solutions.hidden = false;
       showSolution(code);
       ui.promptView.hidden = true;
+      ui.modified.hidden = true;
       ui.resetSource.disabled = true;
       setRunEnabled(code.active !== null && !state.running);
       return;
@@ -422,6 +427,7 @@
     ui.editor.readOnly = false;
     ui.editor.value = onPrompt ? '' : code.active ? code.edits[code.active] : '';
     ui.resetSource.hidden = onPrompt;
+    updateDirty();
     refreshHighlight();
     setRunEnabled(!onPrompt && code.active !== null && !state.running);
   }
@@ -438,8 +444,24 @@
     showCode();
   }
 
+  // The file under edit differs from the step's starter. The prompt is never edited, so it is never modified.
+  function isDirty() {
+    const code = state.code;
+    if (code === null || code.file === 'prompt' || code.active === null) return false;
+    const text = ui.editor.hidden ? code.edits[code.active] : ui.editor.value;
+    return text !== (code.starters[code.active] ?? '');
+  }
+
+  // Shows the "modified" indicator and enables Reset only while the file differs from its starter.
+  function updateDirty() {
+    const dirty = isDirty();
+    ui.modified.hidden = !dirty;
+    ui.resetSource.disabled = !dirty || (state.code !== null && state.code.solutionsOpen);
+  }
+
   function setRunEnabled(enabled) {
     ui.run.disabled = !enabled;
+    ui.check.disabled = !enabled;
   }
 
   // The solution gate. The first press asks the main process for the solutions, which also keeps the gate open for
@@ -469,6 +491,7 @@
     ui.editor.addEventListener('input', () => {
       saveEditorText();
       refreshHighlight();
+      updateDirty();
     });
     ui.editor.addEventListener('scroll', syncHighlightScroll);
     ui.resetSource.addEventListener('click', () => {
@@ -479,6 +502,7 @@
       code.edits[key] = code.starters[key] ?? '';
       ui.editor.value = code.edits[key];
       refreshHighlight();
+      updateDirty();
     });
     ui.fileSelect.addEventListener('change', () => selectFile(ui.fileSelect.value));
     ui.solutionsToggle.addEventListener('click', () => {
@@ -486,6 +510,9 @@
     });
     ui.run.addEventListener('click', () => {
       runCode();
+    });
+    ui.check.addEventListener('click', () => {
+      checkCode();
     });
     ui.stopRun.addEventListener('click', () => {
       window.runner.stopRun();
@@ -499,6 +526,7 @@
     ui.stopRun.disabled = !running;
     if (running) {
       ui.run.disabled = true;
+      ui.check.disabled = true;
     } else if (state.code !== null) {
       setRunEnabled(state.code.active !== null && state.code.file !== 'prompt');
     }
@@ -518,6 +546,42 @@
     } catch (error) {
       appendOutput(`${error.message}\n`, 'error');
       setRunning(false);
+    }
+  }
+
+  // The Check button: a syntax check, then the output check if the syntax passes. Results are shown in the output pane.
+  async function checkCode() {
+    const code = state.code;
+    if (code === null || code.active === null || code.file === 'prompt' || state.running || state.current === null) return;
+    const language = code.active;
+    const source = code.solutionsOpen
+      ? (code.solutions ? (code.solutions[language] ?? '') : '')
+      : ui.editor.value;
+    ui.output.textContent = '';
+    setRunning(true);
+    try {
+      reportCheck(language, await window.runner.checkCode(state.current.id, language, source));
+    } catch (error) {
+      appendOutput(`${error.message}\n`, 'error');
+    } finally {
+      setRunning(false);
+    }
+  }
+
+  function reportCheck(language, result) {
+    if (result.kind === 'diagnostics') {
+      for (const item of result.items) {
+        appendOutput(`main.${EXTENSIONS[language]}:${item.line}:${item.column} - error: ${item.message}\n`, 'error');
+      }
+      appendOutput(`\nCheck found ${result.items.length} problem${result.items.length === 1 ? '' : 's'}.\n`, 'status');
+    } else if (result.kind === 'no-expected') {
+      appendOutput('Check passed: no syntax errors. This step has no expected output to compare.\n', 'status');
+    } else if (result.kind === 'passed') {
+      appendOutput('Check passed: no errors, and the output matches the expected result.\n', 'status');
+    } else {
+      appendOutput('The output does not match the expected result.\n\nExpected:\n', 'error');
+      appendOutput(`${result.expected}\n\nActual:\n`, 'error');
+      appendOutput(`${result.actual}\n`, 'error');
     }
   }
 
@@ -743,6 +807,13 @@
 
   // Ctrl+Left and Ctrl+Right move the cursor by word inside the editor, so they only change lesson elsewhere.
   document.addEventListener('keydown', (event) => {
+    if (event.key === 'F5') {
+      // F5 runs the step, and Ctrl+F5 checks it. Both do what the buttons do, and the browser's reload is turned off.
+      event.preventDefault();
+      if (event.ctrlKey) checkCode();
+      else runCode();
+      return;
+    }
     if (event.key === 'Escape' && state.running) {
       window.runner.stopRun();
       return;

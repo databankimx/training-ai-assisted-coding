@@ -22,6 +22,7 @@ contextBridge.exposeInMainWorld('runner', {
   highlight: (code, language) => ipcRenderer.invoke('code:highlight', code, language),
   runCode: (id, language, code) => ipcRenderer.invoke('run:start', id, language, code),
   stopRun: () => ipcRenderer.invoke('run:stop'),
+  checkCode: (id, language, code) => ipcRenderer.invoke('check:run', id, language, code),
   onRunEvent: (callback) => {
     ipcRenderer.on('run:event', (_event, payload) => callback(payload));
   },

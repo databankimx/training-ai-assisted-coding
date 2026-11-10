@@ -59,6 +59,7 @@ function loadCatalog(courseRoot) {
         section: meta.section ?? null,
         dir: stepDir,
         languages: Array.isArray(meta.languages) ? meta.languages : [],
+        expected: typeof meta.expected === 'string' ? meta.expected : null,
         markdownPath: path.join(stepDir, 'lesson.md'),
       };
     });

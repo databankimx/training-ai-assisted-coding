@@ -27,6 +27,7 @@ const {
 const { loadWindowState, saveWindowState, isVisibleOn } = require('./core/window-state');
 const { probeAll } = require('./core/toolchains');
 const { FILE_NAMES, commandFor } = require('./core/run');
+const { syntaxCommand, parseDiagnostics, outputMatches } = require('./core/check');
 
 // The runner lives in lesson-runner/, inside the course folder.
 const courseRoot = path.resolve(__dirname, '..');
@@ -233,6 +234,68 @@ async function startRun(sender, lessonId, language, code) {
   });
 }
 
+// Writes the learner's code into the run folder, for one step and language.
+function writeSource(lessonId, language, code) {
+  const item = findItem(lessonId);
+  if (!item || item.kind !== 'step' || !item.languages.includes(language)) {
+    throw new Error('This step has no code in that language.');
+  }
+  if (typeof code !== 'string' || code.length > 200000) throw new Error('The code is too long to check.');
+  const dir = path.join(app.getPath('userData'), 'runs', lessonId.replace(/[^A-Za-z0-9-]+/g, '_'));
+  fs.mkdirSync(dir, { recursive: true });
+  const file = FILE_NAMES[language];
+  fs.writeFileSync(path.join(dir, file), code, 'utf8');
+  return { item, dir, file };
+}
+
+// Runs a command to the end and keeps what it printed. Check needs the output, so this doesn't stream it.
+function runToEnd(command, args, cwd, timeoutMs) {
+  return new Promise((resolve) => {
+    const child = spawn(command, args, { cwd, windowsHide: true, shell: false });
+    child.stdin.end();
+    let stdout = '';
+    let stderr = '';
+    const timer = setTimeout(() => child.kill(), timeoutMs);
+    child.stdout.on('data', (chunk) => {
+      stdout += chunk.toString();
+    });
+    child.stderr.on('data', (chunk) => {
+      stderr += chunk.toString();
+    });
+    child.on('error', (error) => {
+      clearTimeout(timer);
+      resolve({ exitCode: null, stdout, stderr: stderr + error.message });
+    });
+    child.on('close', (exitCode) => {
+      clearTimeout(timer);
+      resolve({ exitCode, stdout, stderr });
+    });
+  });
+}
+
+// The Check button. The syntax check runs first. If it passes and the step has an expected output, the program runs
+// and its output is compared with that expected output. A step with no expected output gets the syntax check only.
+async function checkSource(lessonId, language, code) {
+  const { item, dir, file } = writeSource(lessonId, language, code);
+  const tool = (await toolchains())[language];
+  if (!tool || !tool.available) throw new Error(`${language} is not installed on this computer.`);
+
+  const syntax = syntaxCommand(language, file);
+  const syntaxResult = await runToEnd(syntax.command, syntax.args, dir, TIME_LIMIT_MS[language]);
+  const diagnostics = parseDiagnostics(language, syntaxResult);
+  if (diagnostics.length > 0) return { kind: 'diagnostics', items: diagnostics };
+  if (item.expected === null) return { kind: 'no-expected' };
+
+  // For C#, the syntax check is a run of the program, so its output is the output to compare.
+  let output = syntaxResult;
+  if (language !== 'csharp') {
+    const run = commandFor(language, file);
+    output = await runToEnd(run.command, run.args, dir, TIME_LIMIT_MS[language]);
+  }
+  if (outputMatches(item.expected, output.stdout)) return { kind: 'passed' };
+  return { kind: 'mismatch', expected: item.expected, actual: output.stdout };
+}
+
 function registerHandlers() {
   ipcMain.handle('catalog:list', () => summarize(loadCatalog(courseRoot)));
   ipcMain.handle('lesson:open', (_event, id) => openLesson(String(id)));
@@ -279,6 +342,7 @@ function registerHandlers() {
   ipcMain.handle('run:start', (event, id, language, code) =>
     startRun(event.sender, String(id), String(language), code),
   );
+  ipcMain.handle('check:run', (_event, id, language, code) => checkSource(String(id), String(language), code));
   ipcMain.handle('run:stop', () => {
     stopActiveRun();
   });
