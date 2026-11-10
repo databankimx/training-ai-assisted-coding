@@ -1,0 +1,9 @@
+{
+  "title": "Reading the Hypothesis Before Accepting the Fix",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Treat a proposed fix as a hypothesis, check it against cases that differ from the one it was built for, and reject it when a case fails.",
+  "prerequisites": ["Pasting the Actual Output"],
+  "expected": "7 items, size 3: 3 pages pass\n6 items, size 3: 2 pages pass\n0 items, size 3: 0 pages pass"
+}

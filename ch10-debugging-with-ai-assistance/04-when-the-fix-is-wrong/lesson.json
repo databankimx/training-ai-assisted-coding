@@ -1,0 +1,9 @@
+{
+  "title": "When the Fix Is Wrong",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Find an input that breaks the invariant a fix relies on, see how each language fails differently on it, and add the check that makes the failure explicit.",
+  "prerequisites": ["Reading the Hypothesis Before Accepting the Fix"],
+  "expected": "7 items, size 3: 3 pass\n0 items, size 3: 0 pass\n5 items, size 0: error: page size must be positive pass"
+}

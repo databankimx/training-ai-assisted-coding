@@ -330,7 +330,7 @@
 
     const edits = {};
     for (const language of lesson.languages) {
-      edits[language] = lesson.starters[language] ?? '';
+      edits[language] = normalizeLineEndings(lesson.starters[language] ?? '');
     }
     if (lesson.prompt !== null) edits.prompt = lesson.prompt;
     state.code = {
@@ -444,12 +444,18 @@
     showCode();
   }
 
+  // Line endings are compared as LF, because a text area always stores LF. A starter read from a CRLF file would
+  // otherwise look modified as soon as it is shown.
+  function normalizeLineEndings(text) {
+    return text.replace(/\r\n?/g, '\n');
+  }
+
   // The file under edit differs from the step's starter. The prompt is never edited, so it is never modified.
   function isDirty() {
     const code = state.code;
     if (code === null || code.file === 'prompt' || code.active === null) return false;
     const text = ui.editor.hidden ? code.edits[code.active] : ui.editor.value;
-    return text !== (code.starters[code.active] ?? '');
+    return normalizeLineEndings(text) !== normalizeLineEndings(code.starters[code.active] ?? '');
   }
 
   // Shows the "modified" indicator and enables Reset only while the file differs from its starter.
@@ -499,7 +505,7 @@
       if (code === null) return;
       const key = editKey();
       if (key === null || key === 'prompt') return;
-      code.edits[key] = code.starters[key] ?? '';
+      code.edits[key] = normalizeLineEndings(code.starters[key] ?? '');
       ui.editor.value = code.edits[key];
       refreshHighlight();
       updateDirty();
