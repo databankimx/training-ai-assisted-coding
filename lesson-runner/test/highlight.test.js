@@ -12,8 +12,10 @@ const { highlightCode, markdownHighlight } = require('../core/highlight');
 const { createRenderer } = require('../core/markdown');
 
 test('C# keywords are marked for coloring', () => {
-  const html = highlightCode('int x = 1;', 'csharp');
-  assert.match(html, /hljs-keyword">int</);
+  const html = highlightCode('public int x = 1;', 'csharp');
+  assert.match(html, /hljs-keyword">public</);
+  // The highlighter marks the type name with a class of its own, so checking for any class keeps this test stable.
+  assert.match(html, /class="hljs-[a-z_-]+">int</);
 });
 
 test('Python and JavaScript keywords are marked for coloring', () => {
