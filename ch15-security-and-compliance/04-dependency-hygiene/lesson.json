@@ -1,0 +1,9 @@
+{
+  "title": "Dependency Hygiene",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Check each dependency's license against the team's allow list before it is added, give a reason for each dependency that needs review, and recognize why a generated suggestion is not an approval.",
+  "prerequisites": ["Compliance Logic at the Boundary"],
+  "expected": "dependency highlight.js (BSD-3-Clause): allowed\ndependency markdown-it (MIT): allowed\ndependency logging-kit (Apache-2.0): allowed\ndependency some-parser (GPL-3.0): needs review, not on the allow list\ndependency mystery-lib (no license found): needs review, no license found"
+}

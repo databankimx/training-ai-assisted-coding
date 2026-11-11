@@ -1,0 +1,7 @@
+{
+  "title": "Why Broad Refactoring Prompts Go Wrong",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Explain why a request to clean up code invites behavior changes, and rewrite a broad request as a narrow one with a stated scope and a must-not-change list.",
+  "prerequisites": ["Summary: Debugging with AI Assistance"]
+}

@@ -1,0 +1,7 @@
+{
+  "title": "Never Feed Generated Code Into a Runtime Evaluator",
+  "runtime": "none",
+  "minutes": 15,
+  "objective": "Explain why generated code must not be executed by a runtime evaluator inside an application or an agent, and identify the places in a design where that rule is at risk.",
+  "prerequisites": ["The Review Process Has No AI Exception"]
+}

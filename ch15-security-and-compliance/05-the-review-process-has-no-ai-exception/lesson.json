@@ -1,0 +1,7 @@
+{
+  "title": "The Review Process Has No AI Exception",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Describe how a generated change reaches the team's review, standards checks, static analysis, and dependency scanning, and explain why none of those steps can be skipped for generated code.",
+  "prerequisites": ["Dependency Hygiene"]
+}

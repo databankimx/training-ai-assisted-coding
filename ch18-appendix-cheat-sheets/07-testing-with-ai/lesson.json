@@ -1,0 +1,7 @@
+{
+  "title": "Cheat Sheet: Testing With AI Assistance",
+  "runtime": "none",
+  "minutes": 3,
+  "objective": "Judge a test suite by the wrong code it would reject, using mutants.",
+  "prerequisites": []
+}

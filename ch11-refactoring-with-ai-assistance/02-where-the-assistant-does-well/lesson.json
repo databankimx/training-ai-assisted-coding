@@ -1,0 +1,7 @@
+{
+  "title": "Where the Assistant Does Well",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Name the refactorings an assistant handles well, ask for each one with a narrow scope, and check the result for the changes that usually slip in with them.",
+  "prerequisites": ["Why Broad Refactoring Prompts Go Wrong"]
+}

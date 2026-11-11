@@ -1,0 +1,9 @@
+{
+  "title": "Authorization: Who May See What",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Test an order lookup against the rule that a user may read only their own orders, find the case where the rule is broken, and add the check that enforces it.",
+  "prerequisites": ["Security-Sensitive Code"],
+  "expected": "ana reads order 1: returned, total 40\nben reads order 1: refused\nanonymous reads order 1: refused\nana reads order 9: not found"
+}

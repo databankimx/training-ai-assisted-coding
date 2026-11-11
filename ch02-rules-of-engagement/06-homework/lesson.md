@@ -35,7 +35,7 @@ Answer key. Check your reasons against the detail given, not just the category.
 7. **Allowed after removing details.** Remove the username from the file paths. The trace itself is from public code.
 8. **Allowed.** A generic diagram that isn't drawn from any real system.
 9. **Not allowed.** It's a credential, and the sample app's configuration must be cleaned up before anything else. Report it if the key is real.
-10. **Allowed.** It has already been published, which is the clearance the policy asks for.
+10. **Ask first.** Publication on its own isn't the clearance the policy asks for. The release is public, so the risk is low, but the rule is that Information Security decides, and asking takes a moment.
 
 For item 9, the answer also has an action. A key that has been pasted anywhere outside the company's systems is an incident, so report it as the last step described.
 ~~~

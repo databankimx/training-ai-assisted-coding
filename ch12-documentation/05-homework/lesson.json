@@ -1,0 +1,11 @@
+{
+  "title": "Homework: Check a Module's Documentation",
+  "section": "Homework",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "spoiler": true,
+  "minutes": 40,
+  "objective": "Check each documented claim about a module against its behavior, mark the claims the code does not support, and correct the documentation without changing the code.",
+  "prerequisites": ["Keeping Documentation Current"],
+  "expected": "claim \"parcels up to 5000 grams cost 500 cents\": supported\nclaim \"parcels of exactly 5000 grams cost 500 cents\": supported\nclaim \"parcels over 10000 grams cost 1200 cents\": supported\nclaim \"member prices are 10 percent off, rounded down to the cent\": supported\nclaim \"negative weights throw an error\": supported"
+}

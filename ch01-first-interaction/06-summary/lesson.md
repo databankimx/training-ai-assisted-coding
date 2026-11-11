@@ -7,7 +7,7 @@ These are the ideas to carry forward:
 * **The signature and the comment are the specification.** A clear name and a clear rule give the assistant the most to work with.
 * **Tab means you accept it.** The check has to happen before you press Tab, not after.
 * **Expectations come first.** Write what the function should return before you look at what it does.
-* **Refine with a specific request, or write it yourself.** Ask for one named change, and stop after three rounds that don't converge.
+* **Refine with a specific request, or write it yourself.** Ask for one named change, and stop after two rounds that don't converge.
 
 ### Check your understanding
 

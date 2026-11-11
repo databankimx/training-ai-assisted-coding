@@ -1,0 +1,7 @@
+{
+  "title": "Never Run Generated Code Through an Agent",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Explain why an agent must not execute the code it generates, describe the risks in terms of the parts of the agent, and recognize a design that breaks the rule.",
+  "prerequisites": ["Logging and Review"]
+}

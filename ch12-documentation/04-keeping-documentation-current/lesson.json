@@ -1,0 +1,9 @@
+{
+  "title": "Keeping Documentation Current",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 20,
+  "objective": "Find the documentation examples that a code change has made untrue, and update the examples to the behavior the team has decided on.",
+  "prerequisites": ["Reviewing Documentation Against Behavior"],
+  "expected": "claim \"three days overdue costs nothing\": supported\nclaim \"four days overdue costs 25 cents\": supported\nclaim \"200 days overdue costs 1800 cents\": supported"
+}

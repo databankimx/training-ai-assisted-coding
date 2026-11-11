@@ -1,0 +1,7 @@
+{
+  "title": "The Assistant Sees the Code, Not Your Intent",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Explain why documentation generated from code can describe the code's behavior while missing the behavior the author intended, and name the sources a documentation prompt must supply.",
+  "prerequisites": ["Summary: Refactoring with AI Assistance"]
+}

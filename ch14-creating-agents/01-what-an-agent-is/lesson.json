@@ -1,0 +1,7 @@
+{
+  "title": "What an Agent Is",
+  "runtime": "none",
+  "minutes": 25,
+  "objective": "Name the three parts of an agent (a model, tools, and a loop), trace one pass through the loop with an example, and say which part decides what the agent is allowed to do.",
+  "prerequisites": ["Summary: Agentic Workflows"]
+}

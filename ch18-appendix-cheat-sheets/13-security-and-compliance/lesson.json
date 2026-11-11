@@ -1,0 +1,7 @@
+{
+  "title": "Cheat Sheet: Security and Compliance Review",
+  "runtime": "none",
+  "minutes": 3,
+  "objective": "Review a generated change for authorization, input validation, secret exposure, compliance boundaries, and dependencies.",
+  "prerequisites": []
+}

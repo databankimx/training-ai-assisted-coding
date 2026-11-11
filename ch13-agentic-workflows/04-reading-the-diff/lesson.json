@@ -1,0 +1,9 @@
+{
+  "title": "Reading the Diff",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Read an agent's diff for files outside the brief's scope and for removed checks, and decide, file by file, whether the change is accepted.",
+  "prerequisites": ["Checkpoint Supervision"],
+  "expected": "file src/fines.cs: in scope, removed expect lines 0"
+}

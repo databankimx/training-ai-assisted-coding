@@ -1,0 +1,7 @@
+{
+  "title": "Cheat Sheet: Prompts and Constraints",
+  "runtime": "none",
+  "minutes": 3,
+  "objective": "Write a prompt with the six parts, a constraint that can be checked, and a follow-up that keeps what works.",
+  "prerequisites": []
+}

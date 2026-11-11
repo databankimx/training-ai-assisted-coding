@@ -1,12 +1,12 @@
 # First Interaction
 
-In this chapter you use an AI coding assistant on something small, check its answer, and fix it when it's wrong. Nothing here is big. A function that adds two numbers, a function that counts words, and a function that picks out prime numbers are enough to show every habit the rest of the course depends on.
+In this chapter you use an AI coding assistant on something small, check its answer, and fix it when it's wrong. Nothing here is big. A function that adds two numbers, a function that checks whether a number is even, and a function that picks out prime numbers are enough to show every habit the rest of the course depends on.
 
 The goal is not the code. The goal is the habit of reading before you accept. An assistant can produce a correct function in seconds, and it can produce a plausible-looking wrong one in exactly the same time. Your job is to tell which one you have, and you can only do that by checking.
 
 ## What you'll do
 
-The chapter has four steps before the summary:
+The chapter has four steps, then a homework and a summary:
 
 1. **Set up and check your tools.** You confirm that your assistant is working, signed in with a company-provided account, and ready for practice.
 2. **Let the assistant finish a small function.** You type the start of a method, pause, and see what it suggests.

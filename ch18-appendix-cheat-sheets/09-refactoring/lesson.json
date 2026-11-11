@@ -1,0 +1,7 @@
+{
+  "title": "Cheat Sheet: Refactoring",
+  "runtime": "none",
+  "minutes": 3,
+  "objective": "Scope a refactoring, and check each checkpoint against the original on cases that include the boundaries.",
+  "prerequisites": []
+}

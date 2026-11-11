@@ -1,0 +1,7 @@
+{
+  "title": "Cheat Sheet: Agent Loops, Tools, and Approval",
+  "runtime": "none",
+  "minutes": 3,
+  "objective": "Check an agent's design for its tools, its stop conditions, its approval gates, and its log.",
+  "prerequisites": []
+}

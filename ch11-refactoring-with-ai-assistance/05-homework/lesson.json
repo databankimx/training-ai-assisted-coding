@@ -1,0 +1,11 @@
+{
+  "title": "Homework: Find the Checkpoint That Broke",
+  "section": "Homework",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "spoiler": true,
+  "minutes": 40,
+  "objective": "Find the refactoring checkpoint that changed behavior, explain the cause with a case, and fix it so every checkpoint matches the original.",
+  "prerequisites": ["Checkpoints During Refactoring"],
+  "expected": "checkpoint 1 rename: pass\ncheckpoint 2 extract discount: pass\ncheckpoint 3 combine discount: pass"
+}

@@ -79,7 +79,7 @@ Answer key. Each answer includes the reason. Check your reasons as well as your 
 7. Ask first. It's an unpublished internal announcement, and nobody has cleared it.
 8. Not allowed. Product source code is proprietary, and sharing it with an AI tool is a disclosure, even when the question is innocent.
 9. Not allowed. A password is a credential, and no placeholder fixes that.
-10. Allowed. It's already published, which is the clearance the policy asks for.
+10. Ask first. Being on the public website doesn't by itself mean Information Security has cleared the material for an AI tool. The policy asks for that clearance. Asking takes a moment, and the answer is then on record.
 ~~~
 
 ---

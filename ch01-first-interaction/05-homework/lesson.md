@@ -2,7 +2,7 @@
 
 This homework puts the whole chapter into one small job. You'll write a module with three functions. For each function, you'll write the expected results first, let the assistant write the function, and check it against your expectations. Then you'll decide what to do with anything that fails.
 
-You'll do the work in your own practice folder, in the language you chose. There's no starter file, and no solution in the runner. That's deliberate. The point is the process, and a finished answer you can look at would make the process easy to skip.
+You'll do the work in your own practice folder, in the language you chose. The starter file is empty, apart from a comment that says where your code goes. There's no solution in the editor until you ask for one. That's deliberate. The point is the process, and a finished answer you can look at would make the process easy to skip.
 
 ## The three functions
 

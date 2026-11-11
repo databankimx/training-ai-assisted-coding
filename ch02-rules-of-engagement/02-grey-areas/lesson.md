@@ -10,7 +10,7 @@ Ask three questions, and write down the answers. Writing them down matters, beca
 
 1. **Who could be identified, and by what?** Look for names, faces, account numbers, badge numbers, email addresses, and anything that points at one person, even indirectly. A job title in a small team can identify someone.
 2. **What could someone do with it if it reached the wrong place?** A general question about a sorting algorithm does no harm. A system diagram with an internal address gives someone a map of a network.
-3. **Has anyone with the authority to clear it cleared it?** Publication, a previous approval, or a policy example counts. Your own belief that something is probably fine does not.
+3. **Has anyone with the authority to clear it cleared it?** Only an explicit clearance from the Information Security team counts, and so does an earlier approval that clearly covers this kind of item. Publication alone doesn't count, and neither does a policy example. Your own belief that something is probably fine doesn't count either.
 
 If the answers to questions 1 and 2 are "nothing" and "very little," and question 3 is covered by an existing clearance, the item is usually allowed. If any answer is unclear, the item is ask-first.
 

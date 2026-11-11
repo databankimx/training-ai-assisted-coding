@@ -1,0 +1,7 @@
+{
+  "title": "Cheat Sheet: Debugging",
+  "runtime": "none",
+  "minutes": 3,
+  "objective": "Describe a bug, read its output, and test a proposed fix before accepting it.",
+  "prerequisites": []
+}

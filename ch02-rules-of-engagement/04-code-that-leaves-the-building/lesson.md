@@ -32,7 +32,7 @@ Before you add a third-party or open-source dependency, confirm that its license
 
 ## The AI rules that apply to code
 
-The rules restate the policy for AI-assisted work. Use only approved tools and company accounts. Keep confidential material out of unapproved systems. Treat AI output as untrusted until you've reviewed it. Verify generated code against the real dependencies and APIs. And never execute AI-generated code at runtime as a shortcut around the normal review, source control, and CI process. Chapter 13 covers why that last rule exists.
+The rules restate the policy for AI-assisted work. Use only approved tools and company accounts. Keep confidential material out of unapproved systems. Treat AI output as untrusted until you've reviewed it. Verify generated code against the real dependencies and APIs. And never execute AI-generated code at runtime as a shortcut around the normal review, source control, and CI process. Chapter 14 covers why that rule exists, and Chapter 15 covers the review that goes with it.
 
 ## Try it
 

@@ -1,0 +1,7 @@
+{
+  "title": "Summary: Agentic Workflows",
+  "runtime": "none",
+  "minutes": 8,
+  "objective": "Review when a task suits an agent, how to write its brief, how to supervise it at checkpoints, and how to read its diff.",
+  "prerequisites": ["Homework: Review a Second Agent Diff"]
+}

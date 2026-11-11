@@ -1,0 +1,7 @@
+{
+  "title": "Prompt Injection from Files and Web Content",
+  "runtime": "none",
+  "minutes": 25,
+  "objective": "Explain how text inside files and web pages can steer an agent, recognize the places an agent reads untrusted text, and set the rules that keep that text from acting as instructions.",
+  "prerequisites": ["Reading the Diff"]
+}

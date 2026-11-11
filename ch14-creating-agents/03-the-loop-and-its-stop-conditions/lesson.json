@@ -1,0 +1,9 @@
+{
+  "title": "The Loop and Its Stop Conditions",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Read the log of an agent loop, see what happens when it has no done condition, and add the stop conditions that end a run cleanly.",
+  "prerequisites": ["Defining Tools"],
+  "expected": "step 1: list_files -> fines.txt\nstep 2: read_file fines.txt -> cap 2000\nstep 3: write_file fines.txt -> ok\nstep 4: done\nstopped: model reported done"
+}

@@ -1,0 +1,7 @@
+{
+  "title": "What Makes a Task Agentic",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Decide whether a task suits an agent by checking its scope, its checkpoints, its checks, and its reversibility, and say why the answer is no for tasks that fail those tests.",
+  "prerequisites": ["Summary: Documentation"]
+}
