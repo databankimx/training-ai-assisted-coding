@@ -18,6 +18,32 @@ This repository is provided for training and reference purposes only. DataBank I
 
 ---
 
+### Who is this for?
+
+This repository is intended for DataBank IMX employees who write, review, or use code and want to improve their skills in working with AI-assisted coding tools. It is also useful for those who need to understand the rules and best practices for integrating AI into the software development process.
+
+#### Prerequisites
+
+Before using this repository, you should have:
+- Basic knowledge of programming concepts
+- Familiarity with at least one of the supported languages: C#, Python, or JavaScript
+- Access to a Windows environment for running the lesson runner
+- Installed the necessary tools and dependencies as outlined in the setup instructions
+
+If you need to learn or refresh your knowledge of programming concepts or any of the supported languages, you can refer to these tutorials:
+
+- [C# and OnBase API](https://github.com/databankimx/training-csharp-and-onbase)
+- [Python](https://github.com/databankimx/training-python)
+- [JavaScript](https://github.com/databankimx/training-javascript)
+
+Recommended learning paths:
+
+- OnBase developers should complete the C# and OnBase API tutorial.
+- Box and PageIQ developers should complete the JavaScript tutorial.
+- Cloud developers should complete the Python tutorial.
+
+---
+
 ## About
 
 - **Author:** [Scott McLean](mailto:smclean@databankimx.com)
