@@ -77,6 +77,8 @@ Each lesson is a folder with `lesson.json` (title, languages, and metadata) and 
 
 ## Running the course
 
+For the short version, see [QUICKSTART.md](QUICKSTART.md).
+
 ### Lesson runner (recommended)
 
 The lesson runner is the easiest way through the course. It shows each lesson, lets you run and check the code in C#, Python, and JavaScript, and keeps your place between sessions.
