@@ -1,0 +1,11 @@
+{
+  "title": "Homework: Review a Second Agent Diff",
+  "section": "Homework",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "spoiler": true,
+  "minutes": 50,
+  "objective": "Review an agent's diff against its brief, decide file by file, write the checkpoints the run should have had, and produce a diff that keeps only what the brief allows.",
+  "prerequisites": ["Prompt Injection from Files and Web Content"],
+  "expected": "file src/fines.cs: in scope, removed expect lines 0"
+}

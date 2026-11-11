@@ -50,10 +50,28 @@ See the [Development Rules of Engagement](development-rules-of-engagement.md) fo
 |---|---|
 | `ch00-introduction/` | What an assistant does, what this course covers, ownership, setting up GitHub Copilot, and the confidential-data rules |
 | `ch01-first-interaction/` | Setting up your tools, letting the assistant finish a function, reading before you accept, rejecting or refining a suggestion, homework, and a summary |
+| `ch02-rules-of-engagement/` | The AI Acceptable Use Policy in practice: classifying what you have, grey areas, accounts and tools, code that leaves the building, and incidents |
+| `ch03-how-the-model-works/` | Tokens and context, hallucination, training cutoffs and versions, and why neat output is not evidence |
+| `ch04-choosing-the-right-surface/` | Completion, inline edit, chat, planning, and agentic work, and choosing the surface before the prompt |
+| `ch05-writing-effective-prompts/` | A prompt as a spec, weak and strong prompts, constraints, the follow-up cycle, and prompts for tests and documentation |
+| `ch06-context-documents/` | Giving the assistant standing context about a project, and keeping it current |
+| `ch07-writing-the-spec/` | Written specs, the spec template, acceptance examples, and giving a spec to the assistant |
+| `ch08-reviewing-generated-code/` | Reading before running, invented and stale APIs, failure modes, a review checklist, and code that passes and is still wrong |
+| `ch09-testing-with-ai-assistance/` | Why generated tests look finished, acceptance tests first, reviewing suites with mutants, and test-first development |
+| `ch10-debugging-with-ai-assistance/` | Describing a bug, pasting the actual output, testing a fix before accepting it, and finding the invariant a fix misses |
+| `ch11-refactoring-with-ai-assistance/` | Scoping refactorings, behavior-preserving changes, and checkpoints |
+| `ch12-documentation/` | Documentation as a claim, prompting for it, and keeping it current |
+| `ch13-agentic-workflows/` | Agent fit, briefs, checkpoint supervision, reading the diff, and prompt injection |
+| `ch14-creating-agents/` | Tools, the agent loop, stop conditions, approval gates, logs, and why generated code is not run inside a loop |
+| `ch15-security-and-compliance/` | Security-sensitive code, authorization, compliance boundaries, dependency licenses, and the review process |
+| `ch16-knowing-when-to-stop/` | Where assistance pays back, stop conditions, prototype to production, unassisted practice, and a decision framework |
+| `ch17-capstone/` | The loan reminder module: a brief, a spec, an acceptance table, deliverables, and a rubric |
+| `ch18-appendix-cheat-sheets/` | A one-page sheet for each main idea, and a glossary |
+| `tools/` | `check-course.js`, which checks the course for missing files, prerequisites, quizzes, and em dashes |
 | `lesson-runner/` | The desktop lesson runner (Electron) |
 | `resources/` | Internal reference material. Not in this repository; see [Known conflicts](#known-conflicts-and-compatibility-notes) |
 
-Each lesson is a folder with `lesson.json` (title, languages, and metadata) and `lesson.md` (the text). Code steps also have a starter (`main.cs`, `main.py`, `main.js`) and a solution (`solution.cs`, `solution.py`, `solution.js`) for each language. Homework steps have a `prompt.md` with the sample prompt and the reasoning behind it.
+Each lesson is a folder with `lesson.json` (title, languages, and metadata) and `lesson.md` (the text). Code steps also have a starter (`main.cs`, `main.py`, `main.js`) and a solution (`solution.cs`, `solution.py`, `solution.js`) for each language. Some homework steps have a `prompt.md` with the sample prompt and the reasoning behind it.
 
 ---
 
@@ -149,6 +167,7 @@ All three are approved for closed-source commercial use under the Development Ru
 | Date | Changes |
 |---|---|
 | 11/10/2026 | Initial version. Chapter 0 and Chapter 1 (drafted), the lesson runner with Run, Check, the solution gate, the prompt file, and syntax and output checks |
+| 11/10/2026 | Completed course. Chapters 0 to 17 and the cheat-sheet appendix with its glossary (Chapter 18). Chapters 0 to 16 each end with a summary and three quizzes. The lesson runner adds F5 and Ctrl+F5, ghost text, a zoomable code view, and a Check that compares output with each step's expected result. The setup script (`setup.ps1`) installs the tools and the lesson runner. The course checker (`tools/check-course.js`) checks files, prerequisites, quizzes, and em dashes. The capstone has a brief, a spec, an acceptance table, and a rubric. |
 
 ---
 

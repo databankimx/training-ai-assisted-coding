@@ -1,0 +1,7 @@
+{
+  "title": "Cheat Sheet: Specs and Acceptance Examples",
+  "runtime": "none",
+  "minutes": 3,
+  "objective": "Write a spec with its six sections and an acceptance table that covers boundaries and errors.",
+  "prerequisites": []
+}

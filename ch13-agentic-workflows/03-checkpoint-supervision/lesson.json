@@ -1,0 +1,7 @@
+{
+  "title": "Checkpoint Supervision",
+  "runtime": "none",
+  "minutes": 25,
+  "objective": "Run an agentic task in the sequence plan, review, implement, review, test, review, and decide at each checkpoint whether to continue, correct, or stop.",
+  "prerequisites": ["Writing a Brief for an Agent"]
+}

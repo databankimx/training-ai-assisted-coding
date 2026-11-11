@@ -1,0 +1,8 @@
+{
+  "title": "Capstone: A Loan Reminder Module",
+  "section": "Capstone",
+  "runtime": "none",
+  "minutes": 480,
+  "objective": "Use the course's full workflow on one task: a context document, a written spec, generated code in two languages, a test suite, a debugging session, a refactoring pass, documentation, and a written review.",
+  "prerequisites": ["Summary: Knowing When to Stop"]
+}

@@ -20,10 +20,10 @@ The chapter ends with a summary and three quizzes. There is no homework in this 
 
 ## How the lessons work
 
-Each lesson is a step. Steps are short enough to read in one sitting, and most end with a small "Try it" section. Some steps have quizzes. The runner lets you move between steps with the Next button, even when a step belongs to a different chapter.
+Each lesson is a step. Steps are short enough to read in one sitting, and most end with a small "Try it" section. Each chapter ends with a summary and quizzes. The runner lets you move between steps with the Next button, even when a step belongs to a different chapter.
 
 Chapter 0 has no code to run, so the runner shows the lesson text only. Later chapters will ask you to run code in several languages, and the lessons will explain what you need when you get there.
 
-Take your time. Nothing here is graded in a way that matters. There is no pass or fail in this course. If you want feedback on your work later, you can ask for an optional review from the development team, if you're an employee.
+Take your time. Nothing in the chapters before the capstone is graded. The capstone has a rubric for review, which Chapter 17 explains. If you want feedback on your work later, you can ask for an optional review from the development team, if you're an employee.
 
 ---

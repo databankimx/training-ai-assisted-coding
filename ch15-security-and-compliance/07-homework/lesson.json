@@ -1,0 +1,11 @@
+{
+  "title": "Homework: Security Review of a Generated Change",
+  "section": "Homework",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "spoiler": true,
+  "minutes": 60,
+  "objective": "Review a generated refund function, classify each finding by its category, write a fix for each one, and confirm the fixed function with the cases the rule requires.",
+  "prerequisites": ["Never Feed Generated Code Into a Runtime Evaluator"],
+  "expected": "log: refund requested by ana for order 1\nana refunds order 1 for 10: refunded 10\nlog: refund requested by ben for order 1\nben refunds order 1 for 10: refused\nlog: refund requested by ana for order 1\nana refunds order 1 for -5: refused\nlog: refund requested by ana for order 1\nana refunds order 1 for 50: refused"
+}

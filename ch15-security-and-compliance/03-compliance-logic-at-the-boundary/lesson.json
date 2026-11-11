@@ -1,0 +1,9 @@
+{
+  "title": "Compliance Logic at the Boundary",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Test a retention rule at its boundary, find the record the rule keeps and the code deletes, and correct the comparison so the code follows the written rule.",
+  "prerequisites": ["Authorization: Who May See What"],
+  "expected": "record 1 (30 days): kept\nrecord 2 (90 days): kept\nrecord 3 (91 days): deleted\nrecord 4 (400 days): deleted\nretention job: deleted 2 of 4"
+}

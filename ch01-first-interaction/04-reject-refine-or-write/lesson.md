@@ -10,7 +10,7 @@ The mistake to avoid is the fourth choice, the one nobody lists: accepting the s
 
 ## The suggestion that's wrong
 
-Here is an earlier suggestion for `IsPrime`. It's the same loop as before, but it has a different fault. It doesn't handle numbers below 2:
+Here is an earlier suggestion for `IsPrime`. It's a simpler loop than the one in the last step, and it has a different fault. It doesn't handle numbers below 2:
 
 ~~~examples
 ```csharp
@@ -108,9 +108,9 @@ This version is correct for the four numbers. It's also slower than it needs to 
 
 ## When to write it yourself
 
-Refining works well when the fault is small. It works poorly when you've asked twice and the answer keeps moving. If three rounds haven't produced a version you can explain, stop asking. The assistant isn't going to have a breakthrough on the fourth try, and each round costs you the attention you'd spend on the code.
+Refining works well when the fault is small. It works poorly when you've asked twice and the answer keeps moving. If two rounds haven't produced a version you can explain, stop asking. The assistant isn't going to have a breakthrough on the next try, and each round costs you the attention you'd spend on the code.
 
-Here is the same fix written by hand, for comparison. It's one extra check, and writing it takes less time than the third request would:
+Here is the same fix written by hand, for comparison. It's one extra check, and writing it takes less time than another request would:
 
 ~~~examples
 ```csharp

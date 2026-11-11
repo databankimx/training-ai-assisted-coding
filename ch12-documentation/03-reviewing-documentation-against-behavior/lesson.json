@@ -1,0 +1,9 @@
+{
+  "title": "Reviewing Documentation Against Behavior",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Turn each documented sentence into a claim the code can be run against, find the claims the code does not support, and correct either the code or the documentation to match the spec.",
+  "prerequisites": ["Prompting for Documentation"],
+  "expected": "claim \"throws for negative days\": supported\nclaim \"caps the fine at 2000 cents\": supported\nclaim \"charges 25 cents per day after the first three free days\": supported\nclaim \"returns zero during the first three free days\": supported"
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Behavior-Preserving or Behavior-Changing",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Compare a refactored function with the original on the same cases, read each result as same or different, and tell a behavior-preserving change from a behavior-changing one.",
+  "prerequisites": ["Where the Assistant Does Well"],
+  "expected": "105 member: original $0.95, refactored $0.95 same\n100 regular: original $1.00, refactored $1.00 same\n1999 member: original $18.00, refactored $18.00 same"
+}

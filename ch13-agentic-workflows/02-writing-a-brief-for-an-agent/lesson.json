@@ -1,0 +1,7 @@
+{
+  "title": "Writing a Brief for an Agent",
+  "runtime": "none",
+  "minutes": 25,
+  "objective": "Write a brief for an agent that states its scope, its constraints, its checkpoints, and its done criteria, before the run starts.",
+  "prerequisites": ["What Makes a Task Agentic"]
+}

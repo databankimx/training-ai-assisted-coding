@@ -1,0 +1,9 @@
+{
+  "title": "Checkpoints During Refactoring",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Run a refactoring in checkpoints, compare each checkpoint with the original on cases that include the boundaries, and stop at the first checkpoint that fails.",
+  "prerequisites": ["Behavior-Preserving or Behavior-Changing"],
+  "expected": "checkpoint 1 rename: pass\ncheckpoint 2 extract tiers: pass\ncheckpoint 3 combine conditions: pass"
+}

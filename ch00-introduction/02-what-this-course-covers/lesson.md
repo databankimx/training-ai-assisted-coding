@@ -47,6 +47,6 @@ You will need a machine with Visual Studio 2026 and/or VS Code, and access to a 
 
 ## Try it
 
-Write one sentence describing a task you do at work that you think an assistant might help with. Don't include any names, customer details, or internal system names. Keep the sentence general, such as "I write a summary of a meeting every week." You'll come back to this sentence in the capstone.
+Write one sentence describing a task you do at work that you think an assistant might help with. Don't include any names, customer details, or internal system names. Keep the sentence general, such as "I write a summary of a meeting every week." Keep the sentence. You'll revisit it in Chapter 16, when you use the decision framework on a real task.
 
 ---

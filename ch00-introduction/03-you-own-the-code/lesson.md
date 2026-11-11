@@ -31,7 +31,7 @@ If the answer to any of these is "I'm not sure," you're not ready to submit. You
 
 Ownership doesn't mean you have to write everything yourself. The course is about using assistants well, and a good assistant saves real time. Ownership means you don't submit what you don't understand.
 
-It also doesn't mean you have to be the only reviewer. Your team's review process still applies to every change, whoever or whatever produced it. Review is not a sign of distrust. It's how a team makes sure two people have looked at the same thing. The development rules of engagement describe how that review works for our code: [Development Rules of Engagement](https://databankimx.sharepoint.com/:b:/r/sites/Hub-PS/DevTools/Policies/development-rules-of-engagement.pdf?d=w1c01477e09e048acbe4c96eba851a183&csf=1&web=1&e=soWe8x).
+It also doesn't mean you have to be the only reviewer. Your team's review process still applies to every change, whoever or whatever produced it. Review is not a sign of distrust. It's how a team makes sure two people have looked at the same thing. The development rules of engagement describe how that review works for our code: [Development Rules of Engagement](../../development-rules-of-engagement.md).
 
 ## Try it
 

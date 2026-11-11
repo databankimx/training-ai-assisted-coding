@@ -1,0 +1,7 @@
+{
+  "title": "Where Assistance Is Most Valuable",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Sort a set of tasks by how much an assistant helps, using the three conditions that make assistance pay back: a familiar domain, a quick check, and a cheap fix.",
+  "prerequisites": ["Summary: Security and Compliance"]
+}

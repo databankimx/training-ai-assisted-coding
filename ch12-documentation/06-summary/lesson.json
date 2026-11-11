@@ -1,0 +1,7 @@
+{
+  "title": "Summary: Documentation",
+  "runtime": "none",
+  "minutes": 8,
+  "objective": "Review why generated documentation needs checking against behavior, how to prompt for it, and how to keep it current.",
+  "prerequisites": ["Homework: Check a Module's Documentation"]
+}

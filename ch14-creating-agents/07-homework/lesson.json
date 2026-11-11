@@ -1,0 +1,11 @@
+{
+  "title": "Homework: Build a Small Agent From a Spec",
+  "section": "Homework",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "spoiler": true,
+  "minutes": 60,
+  "objective": "Find the three places where an agent built from a spec departs from the spec, fix each one, and read the log of the fixed run.",
+  "prerequisites": ["Never Run Generated Code Through an Agent"],
+  "expected": "[1] list_files -> notes.txt, temp.txt\n[2] read_file notes.txt -> keep this\n[3] delete_file temp.txt -> needs approval, not deleted\nstopped: delete needs approval"
+}

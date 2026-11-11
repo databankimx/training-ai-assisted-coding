@@ -5,7 +5,7 @@ This chapter turned the company's AI policy into decisions you can make at your 
 These are the ideas to carry forward:
 
 * **Classify before you paste.** Allowed, allowed after removing details, not allowed, or ask first. The category depends on what the item identifies, not on how harmless it looks.
-* **Publication is clearance; your belief is not.** Something that has been published has been cleared. Something you think is probably fine has not.
+* **Only Information Security clears data; your belief does not.** Data stays confidential until the Information Security team has explicitly cleared it. Publishing something doesn't clear it, and neither does your view that it's probably fine.
 * **Check the account every time.** The company account is the one for company work, and the free tier is for learning on invented data.
 * **New tools go through approval first.** Your manager starts it, IT approves it, and a helpdesk ticket records it.
 * **Code that leaves the building needs a quote, source control, review, and scans.** AI-assisted code gets exactly the same treatment.

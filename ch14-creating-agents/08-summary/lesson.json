@@ -1,0 +1,7 @@
+{
+  "title": "Summary: Creating Agents",
+  "runtime": "none",
+  "minutes": 8,
+  "objective": "Review the parts of an agent, the stop conditions and approval gates in its loop, the log a reviewer reads, and why generated code is not run inside the loop.",
+  "prerequisites": ["Homework: Build a Small Agent From a Spec"]
+}

@@ -1,0 +1,7 @@
+{
+  "title": "Prompting for Documentation",
+  "runtime": "none",
+  "minutes": 20,
+  "objective": "Write a documentation prompt that names the reader, the sources, and the claims to cover, and recognize why a vague request produces a document that can't be checked.",
+  "prerequisites": ["The Assistant Sees the Code, Not Your Intent"]
+}

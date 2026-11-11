@@ -1,0 +1,9 @@
+{
+  "title": "Scope and Approval",
+  "runtime": "multi",
+  "languages": ["csharp", "python", "javascript"],
+  "minutes": 25,
+  "objective": "Find an action in an agent's log that changed a file without asking, add an approval gate in front of that action, and read the log of the gated run.",
+  "prerequisites": ["The Loop and Its Stop Conditions"],
+  "expected": "step 1: list_files -> fines.txt\nstep 2: read_file fines.txt -> cap 2000\nstep 3: write_file fines.txt -> needs approval, not written\nstopped: write needs approval"
+}
