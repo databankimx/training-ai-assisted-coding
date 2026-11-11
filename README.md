@@ -39,8 +39,8 @@ If you need to learn or refresh your knowledge of programming concepts or any of
 Recommended learning paths:
 
 - OnBase developers should complete the C# and OnBase API tutorial.
-- Box and PageIQ developers should complete the JavaScript tutorial.
-- Cloud developers should complete the Python tutorial.
+- PageIQ developers should complete the JavaScript tutorial.
+- Box developers should complete the Python tutorial.
 
 ---
 
