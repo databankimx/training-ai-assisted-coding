@@ -1,0 +1,19 @@
+# DataBank Standards Policy Configuration
+# See Custom-Dev-Developer-Guide.md for full rule documentation.
+#
+# The chapter folders (ch00-* to ch18-*) contain lesson content and sample
+# starter and solution files in C#, Python, and JavaScript. They are training
+# material, not production code, and are excluded from standards enforcement.
+# The lesson-runner and tools folders are production code and stay in scope.
+
+python:
+  excluded_globs:
+    - "ch[0-9][0-9]-*/**"
+
+javascript:
+  excluded_globs:
+    - "ch[0-9][0-9]-*/**"
+
+csharp:
+  excluded_globs:
+    - "ch[0-9][0-9]-*/**"

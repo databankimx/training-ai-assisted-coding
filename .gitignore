@@ -198,3 +198,6 @@ sonar/
 
 # Internal DataBank reference material. Not for the public repository.
 resources/
+
+# Test coverage output
+coverage/
