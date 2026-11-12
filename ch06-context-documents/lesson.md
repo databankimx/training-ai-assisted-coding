@@ -64,6 +64,8 @@ The three versions do the same job, in the conventions of their languages. The c
 4. **Using it.** Pasting, attaching, and how long a document's influence lasts.
 5. **Keeping it current.** How a document goes stale, and how to catch it.
 
+If Markdown is new to you, the standalone Markdown Basics tutorial covers the parts this chapter uses, in `../../training-markdown`. Work through it first if a heading or a table doesn't behave as you expect.
+
 The homework is a context document for an unfamiliar module, used to generate a small feature, with a report on where the document helped and where it was missing. The summary has three quizzes.
 
 ---

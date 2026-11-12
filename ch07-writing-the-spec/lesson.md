@@ -17,6 +17,8 @@ The spec also tells you when you're done. Without one, "done" means the code loo
 3. **Acceptance examples.** Concrete input and output pairs, and how they become tests.
 4. **Giving the spec to the assistant.** How to hand it over, and how to check the output against every example.
 
+If Markdown is new to you, the standalone Markdown Basics tutorial covers the parts you'll use in a spec, in `../../training-markdown`. Work through it first if a table or a code block doesn't display as you expect.
+
 The homework is a spec for a small parser, written from a short description, followed by generated code, and a defect hunt. The summary has three quizzes.
 
 Each step uses the same running example: the fines calculator from the Chapter 6 homework, with a new grace-period feature. The feature is small enough to hold in your head, and it has the kinds of edge cases that make specs worth writing.
