@@ -1,0 +1,14 @@
+# Default owners for the entire repository.
+* @bbutler-databank @smclean-databank
+
+# CI/CD and repository automation.
+.github/ @bbutler-databank
+.github/workflows/ @bbutler-databank
+
+# Lesson runner application and course tooling.
+lesson-runner/ @bbutler-databank @smclean-databank
+tools/ @bbutler-databank @smclean-databank
+setup.ps1 @bbutler-databank
+
+# Lesson runner test suite.
+lesson-runner/test/ @bbutler-databank @smclean-databank
