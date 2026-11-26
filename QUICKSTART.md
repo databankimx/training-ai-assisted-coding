@@ -129,6 +129,7 @@ The saved progress includes your quiz answers, which solutions you've revealed, 
 - **Setup says the tests failed.** The message says so, and the full output is needed to find the cause. Send it to the course owner, since it means the course's own files need attention.
 - **The runner says Node.js wasn't found.** Open a new terminal after installing Node.js, so it has the updated PATH, then start the runner again.
 - **`npm start` fails with "package.json not found".** You're in the repository root. Change to the `lesson-runner` folder first.
+- **The first C# run prints a long .NET welcome message and waits.** This happens once, the first time the .NET SDK runs on your computer. Press Escape to stop it, then run the file again. After that, C# runs as expected.
 - **A program runs for a long time.** Press Escape to stop it. Check the program for a loop with no end.
 - **A lesson's quiz shows an error.** Report the lesson. It's a fault in the course, not in your setup.
 - **Progress looks wrong, or the runner opens an old view.** Restart the runner. If it still looks wrong, reset progress as described above.

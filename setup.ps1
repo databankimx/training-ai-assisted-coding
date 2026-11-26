@@ -925,7 +925,11 @@ function Start-Runner($Launch) {
     if ((Get-Prop $Launch "kind" "") -eq "electron") {
         $exe = Join-Path $folder "node_modules\electron\dist\electron.exe"
         if (Test-Path -LiteralPath $exe) {
-            Start-Process -FilePath $exe -ArgumentList "." -WorkingDirectory $folder
+            # The runner's output goes to files. Without this, Electron writes its messages into this console and holds it.
+            $logDir = Split-Path -Parent $script:LogFile
+            Start-Process -FilePath $exe -ArgumentList "." -WorkingDirectory $folder `
+                -RedirectStandardOutput (Join-Path $logDir "lesson-runner-out.log") `
+                -RedirectStandardError (Join-Path $logDir "lesson-runner-err.log")
             Write-LogOnly "Started the lesson runner from $folder."
         } else {
             Set-Outcome "lesson-runner" "warning" "Electron isn't installed in $folder, so the runner wasn't started."

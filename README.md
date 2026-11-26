@@ -118,6 +118,8 @@ npm start
 
 Use the Lesson and Source tabs for the text and the code. Choose a language from the tabs, then press **Run** to run your code, or **Check** to check it for syntax errors and, where the step has an expected output, to compare the output with it. **Show solutions (spoiler)** opens the sample solutions in all three languages, and the sample prompt in `prompt.md`.
 
+The first time you run a C# file, the .NET SDK may print a long welcome message and wait. If it does, press Escape to stop the program, then run it again. After that first run, C# files run as expected.
+
 Keyboard shortcuts:
 
 | Key | Action |
