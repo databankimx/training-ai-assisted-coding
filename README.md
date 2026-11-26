@@ -84,7 +84,7 @@ See the Development Rules of Engagement linked above for the full policy, includ
 
 The runner runs Python, C#, and JavaScript only when the matching tool is installed. A missing tool hides its tab rather than failing.
 
-> `setup.ps1` installs these tools with winget, clones the course, and installs the lesson runner's packages. Run it with `pwsh -NoProfile -ExecutionPolicy Bypass -File .\setup.ps1`, then `npm start` in `lesson-runner`.
+> `setup.ps1` installs these tools with winget, clones the course, and installs the lesson runner's packages. Run it with `powershell -NoProfile -ExecutionPolicy Bypass -File .\setup.ps1`, then `npm start` in `lesson-runner`.
 
 ---
 
