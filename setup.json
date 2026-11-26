@@ -3,7 +3,7 @@
   "name": "Working With AI-Assisted Coding",
   "folder": "training-ai-assisted-coding",
   "repoUrl": "https://github.com/databankimx/training-ai-assisted-coding.git",
-  "branch": "dev",
+  "branch": "main",
   "baseDirectory": "C:\\Development\\training",
   "runTests": true,
   "installs": {
