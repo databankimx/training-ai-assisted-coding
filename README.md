@@ -8,7 +8,7 @@ This repository is provided for training and reference purposes only. DataBank I
 
 ---
 
-### What is this repository for?
+## What is this repository for?
 
 * A course on using AI coding assistants well: choosing the right way to work, writing clear requests, giving the assistant context, reviewing what it produces, and knowing when not to use it
 * Chapter-by-chapter lessons in C#, Python, and JavaScript. Each example is shown in all three languages, and the lesson runner lets you choose which one you see
@@ -18,59 +18,145 @@ This repository is provided for training and reference purposes only. DataBank I
 
 ---
 
-### Who is this for?
+## Who is this for?
 
-This repository is intended for DataBank IMX employees who write, review, or use code and want to improve their skills in working with AI-assisted coding tools. It is also useful for those who need to understand the rules and best practices for integrating AI into the software development process.
+* DataBank IMX employees who write, review, or use code and want to improve their skills in working with AI-assisted coding tools
+* Anyone who needs to understand the rules and best practices for integrating AI into the software development process
 
-#### Prerequisites
+**Prerequisites**
 
-Before using this repository, you should have:
-- Basic knowledge of programming concepts
-- Familiarity with at least one of the supported languages: C#, Python, or JavaScript
-- Access to a Windows environment for running the lesson runner
-- Installed the necessary tools and dependencies as outlined in the setup instructions
+* Basic knowledge of programming concepts
+* Familiarity with at least one of the supported languages: C#, Python, or JavaScript
+* Access to a Windows environment for running the lesson runner
+* The tools and dependencies in [Setup and requirements](#setup-and-requirements)
 
-If you need to learn or refresh your knowledge of programming concepts or any of the supported languages, you can refer to these tutorials:
+If you need to learn or refresh your knowledge of programming concepts or any of the supported languages, these tutorials cover them:
 
-- [C# and OnBase API](https://github.com/databankimx/training-csharp-and-onbase)
-- [Python](https://github.com/databankimx/training-python)
-- [JavaScript](https://github.com/databankimx/training-javascript)
+* [C# and OnBase API](https://github.com/databankimx/training-csharp-and-onbase)
+* [Python](https://github.com/databankimx/training-python)
+* [JavaScript](https://github.com/databankimx/training-javascript)
 
-Recommended learning paths:
+**Recommended learning paths**
 
-- OnBase developers should complete the C# and OnBase API tutorial.
-- PageIQ developers should complete the JavaScript tutorial.
-- Box developers should complete the Python tutorial.
+* OnBase developers should complete the C# and OnBase API tutorial.
+* PageIQ developers should complete the JavaScript tutorial.
+* Box developers should complete the Python tutorial.
 
 ---
 
 ## About
 
-- **Author:** [Scott McLean](mailto:smclean@databankimx.com)
-- **Purpose:** Internal training for everyone at DataBank IMX who writes, reviews, or uses code, on the rules that apply when AI tools are part of the work
+* **Author:** [Scott McLean](mailto:smclean@databankimx.com)
+* **Purpose:** Internal training for everyone at DataBank IMX who writes, reviews, or uses code, on the rules that apply when AI tools are part of the work
 
 ---
 
 ## DataBank Responsibilities for Custom Code
 
-All DataBank employees - including those working with AI-assisted tools - are bound by the [Development Rules of Engagement](development-rules-of-engagement.md). That document defines the rules for quoting, approving, developing, reviewing, scanning, storing, and delivering custom code for client work.
+All DataBank employees - including those working with AI-assisted tools - are bound by the Development Rules of Engagement, published as the [development-rules-of-engagement.pdf](https://databankimx.sharepoint.com/:b:/r/sites/Hub-PS/DevTools/Policies/development-rules-of-engagement.pdf?d=w1c01477e09e048acbe4c96eba851a183&csf=1&web=1&e=uL7JEw). That document defines the rules for quoting, approving, developing, reviewing, scanning, storing, and delivering custom code for client work.
 
 Key obligations that apply to everyone on every custom code engagement:
 
-- **You own the code you deliver.** This applies equally to hand-written code, AI-assisted code, and AI-generated code. "The AI wrote it" is not an acceptable explanation for a production issue, a failed review, a security finding, or a support problem.
-- **Code must be reviewed before delivery.** Review is interactive and must confirm that the code works, meets DataBank standards, is maintainable, and that the developer understands it well enough to explain, debug, and maintain it. Polished or well-formatted output - including AI-generated output - is not evidence of correctness.
-- **Code must be in source control before delivery.** All custom code must be committed to the appropriate DataBank GitHub Enterprise repository before it is delivered to a client, regardless of whether the client receives source code, compiled binaries, or deployed functionality.
-- **CI scanning must pass before delivery.** Required checks are the standards policy scan, SonarQube, and Snyk. A passing local build is not a substitute.
-- **All third-party dependencies must be license-vetted.** The license must permit closed-source commercial use. Copyleft or unclear licensing must be escalated before use. Dependencies must not be added simply because an AI tool suggested them.
-- **Only approved AI tools may be used.** Use only IT-approved tools through company accounts. All data entered into AI systems is subject to the [DataBank AI Acceptable Use Policy](https://workforcenow.adp.com/mascsr/wfncontenttools/file-management/file/JTJGc3RhdGljJTJGY2xpZW50cyUyRmNvbnRlbnQlMkZBSStBY2NlcHRhYmxlK1VzZStQb2xpY3kucGRmJTNGMTc3MTM0NzA4NjE4MQ==) and must be treated as confidential by default.
-- **Custom code is billable work.** Code must be tied to an approved quote or engagement before commitment or delivery. Development quotes require approval from the Development Director or delegated development leadership before being sent externally.
-- **Exceptions require explicit approval.** Time pressure alone is not a reason to bypass quote approval, source control, review, or CI scanning.
+* **You own the code you deliver.** This applies equally to hand-written code, AI-assisted code, and AI-generated code. "The AI wrote it" is not an acceptable explanation for a production issue, a failed review, a security finding, or a support problem.
+* **Code must be reviewed before delivery.** Review is interactive and must confirm that the code works, meets DataBank standards, is maintainable, and that the developer understands it well enough to explain, debug, and maintain it. Polished or well-formatted output - including AI-generated output - is not evidence of correctness.
+* **Code must be in source control before delivery.** All custom code must be committed to the appropriate DataBank GitHub Enterprise repository before it is delivered to a client, regardless of whether the client receives source code, compiled binaries, or deployed functionality.
+* **CI scanning must pass before delivery.** Required checks are the standards policy scan, SonarQube, and Snyk. A passing local build is not a substitute.
+* **All third-party dependencies must be license-vetted.** The license must permit closed-source commercial use. Copyleft or unclear licensing must be escalated before use. Dependencies must not be added simply because an AI tool suggested them.
+* **Only approved AI tools may be used.** Use only IT-approved tools through company accounts. All data entered into AI systems is subject to the [DataBank AI Acceptable Use Policy](https://workforcenow.adp.com/mascsr/wfncontenttools/file-management/file/JTJGc3RhdGljJTJGY2xpZW50cyUyRmNvbnRlbnQlMkZBSStBY2NlcHRhYmxlK1VzZStQb2xpY3kucGRmJTNGMTc3MTM0NzA4NjE4MQ==) and must be treated as confidential by default.
+* **Custom code is billable work.** Code must be tied to an approved quote or engagement before commitment or delivery. Development quotes require approval from the Development Director or delegated development leadership before being sent externally.
+* **Exceptions require explicit approval.** Time pressure alone is not a reason to bypass quote approval, source control, review, or CI scanning.
 
-See the [Development Rules of Engagement](development-rules-of-engagement.md) for the full policy, including billing and quoting rules, source-code delivery rules, the delivery readiness checklist, and the exception process.
+See the Development Rules of Engagement linked above for the full policy, including billing and quoting rules, source-code delivery rules, the delivery readiness checklist, and the exception process.
+
+> Policy document links point to DataBank internal locations. They may not open for readers outside DataBank IMX.
 
 ---
 
-## Course structure
+## Setup and requirements
+
+* Windows 10 or Windows 11
+* Node.js 24 or later (for the lesson runner, and for running JavaScript files)
+* Python 3.12 or later (for running Python files)
+* .NET 10 SDK (for running C# files)
+* PowerShell 7 (`pwsh`) for the command examples
+* An approved AI tool through a company account. For practice on invented examples, the free tier of GitHub Copilot is fine. Chapter 0 covers the setup.
+* Visual Studio 2026 or VS Code, for writing your own code
+
+The runner runs Python, C#, and JavaScript only when the matching tool is installed. A missing tool hides its tab rather than failing.
+
+> `setup.ps1` installs these tools with winget, clones the course, and installs the lesson runner's packages. Run it with `powershell -NoProfile -ExecutionPolicy Bypass -File .\setup.ps1`, then `npm start` in `lesson-runner`.
+
+---
+
+## Third Party Licenses
+
+Each library used in this repository is listed below. Check each library's license file before you use it outside this repository.
+
+| Component | License | Used for |
+|---|---|---|
+| Electron | MIT | The lesson runner's desktop window |
+| markdown-it | MIT | Rendering lesson Markdown |
+| highlight.js | BSD-3-Clause | Coloring code in the lessons and the editor |
+
+All three are approved for closed-source commercial use under the Development Rules of Engagement.
+
+---
+
+## Running the course
+
+For the short version, see [QUICKSTART.md](QUICKSTART.md).
+
+### Lesson runner (recommended)
+
+The lesson runner is the easiest way through the course. It shows each lesson, lets you run and check the code in C#, Python, and JavaScript, and keeps your place between sessions.
+
+```pwsh
+cd lesson-runner
+npm install
+npm start
+```
+
+Use the Lesson and Source tabs for the text and the code. Choose a language from the tabs, then press **Run** to run your code, or **Check** to check it for syntax errors and, where the step has an expected output, to compare the output with it. **Show solutions (spoiler)** opens the sample solutions in all three languages, and the sample prompt in `prompt.md`.
+
+The first time you run a C# file, the .NET SDK may print a long welcome message and wait. If it does, press Escape to stop the program, then run it again. After that first run, C# files run as expected.
+
+Keyboard shortcuts:
+
+| Key | Action |
+|---|---|
+| Ctrl+Right, Ctrl+Left | Next and previous lesson (not while typing in the editor) |
+| Ctrl with the mouse wheel | Change the lesson text size |
+| Escape | Stop a running program |
+| Ctrl+Alt+Shift+Backspace | Clear saved progress: quiz answers, spoiler states, the last lesson, and solution reveals |
+
+### Running a sample file directly
+
+You can work through the course without the runner. Each step's files are in its folder under the course root. Copy a starter into your practice folder, then run it, or run a solution to see the expected output.
+
+Make your practice folder once, following Chapter 1, step 1. We suggest `C:\Development\ai-practice\ch01`.
+
+To run a file, open a terminal in the folder that contains it and use the command for its language:
+
+| Language | Run | Check syntax only |
+|---|---|---|
+| C# | `dotnet run main.cs` | `dotnet run main.cs` (compile errors appear before the program's output) |
+| Python | `python main.py` | `python -m py_compile main.py` |
+| JavaScript | `node main.js` | `node --check main.js` |
+
+For example, to run the Chapter 1, step 2 solution in Python:
+
+```pwsh
+cd C:\Development\training\training-ai-assisted-coding\ch01-first-interaction\02-let-the-assistant-finish
+python solution.py
+```
+
+The expected output for each step is listed in `lesson.json` (the `expected` field) and in the lesson. Compare your output with it. A starter file shows a different result on purpose, because the placeholder is not finished.
+
+Each step's sample solution is in the same folder as its starter. Read the lesson before you open the solution, so you try the step first.
+
+---
+
+## Repository structure
 
 | Path | Contents |
 |---|---|
@@ -95,111 +181,37 @@ See the [Development Rules of Engagement](development-rules-of-engagement.md) fo
 | `ch18-appendix-cheat-sheets/` | A one-page sheet for each main idea, and a glossary |
 | `tools/` | `check-course.js`, which checks the course for missing files, prerequisites, quizzes, and em dashes |
 | `lesson-runner/` | The desktop lesson runner (Electron) |
-| `resources/` | Internal reference material. Not in this repository; see [Known conflicts](#known-conflicts-and-compatibility-notes) |
+| `resources/` | Internal reference material, not included in this repository |
 
 Each lesson is a folder with `lesson.json` (title, languages, and metadata) and `lesson.md` (the text). Code steps also have a starter (`main.cs`, `main.py`, `main.js`) and a solution (`solution.cs`, `solution.py`, `solution.js`) for each language. Some homework steps have a `prompt.md` with the sample prompt and the reasoning behind it.
 
 ---
 
-## Running the course
-
-For the short version, see [QUICKSTART.md](QUICKSTART.md).
-
-### Lesson runner (recommended)
-
-The lesson runner is the easiest way through the course. It shows each lesson, lets you run and check the code in C#, Python, and JavaScript, and keeps your place between sessions.
-
-```powershell
-cd lesson-runner
-npm install
-npm start
-```
-
-Use the Lesson and Source tabs for the text and the code. Choose a language from the tabs, then press **Run** to run your code, or **Check** to check it for syntax errors and, where the step has an expected output, to compare the output with it. **Show solutions (spoiler)** opens the sample solutions in all three languages, and the sample prompt in `prompt.md`.
-
-Keyboard shortcuts:
-
-| Key | Action |
-|---|---|
-| Ctrl+Right, Ctrl+Left | Next and previous lesson (not while typing in the editor) |
-| Ctrl with the mouse wheel | Change the lesson text size |
-| Escape | Stop a running program |
-| Ctrl+Alt+Shift+Backspace | Clear saved progress: quiz answers, spoiler states, the last lesson, and solution reveals |
-
-The runner shows only the languages that are installed on your computer. If none are installed, see [Setup and requirements](#setup-and-requirements).
-
-### Running a sample file directly
-
-You can work through the course without the runner. Each step's files are in its folder under the course root. Copy a starter into your practice folder, then run it, or run a solution to see the expected output.
-
-Make your practice folder once, following Chapter 1, step 1. We suggest `C:\Development\ai-practice\ch01`.
-
-To run a file, open a terminal in the folder that contains it and use the command for its language:
-
-| Language | Run | Check syntax only |
-|---|---|---|
-| C# | `dotnet run main.cs` | `dotnet run main.cs` (compile errors appear before the program's output) |
-| Python | `python main.py` | `python -m py_compile main.py` |
-| JavaScript | `node main.js` | `node --check main.js` |
-
-For example, to run the Chapter 1, step 2 solution in Python:
-
-```powershell
-cd C:\Development\training\training-ai-assisted-coding\ch01-first-interaction\02-let-the-assistant-finish
-python solution.py
-```
-
-The expected output for each step is listed in `lesson.json` (the `expected` field) and in the lesson. Compare your output with it. A starter file shows a different result on purpose, because the placeholder is not finished.
-
-Each step's sample solution is in the same folder as its starter. Read the lesson before you open the solution, so you try the step first.
-
----
-
-## Setup and requirements
-
-- Windows 10 or Windows 11
-- Node.js 24 or later (for the lesson runner, and for running JavaScript files)
-- Python 3.12 or later (for running Python files)
-- .NET 10 SDK (for running C# files)
-- An approved AI tool through a company account. For practice on invented examples, the free tier of GitHub Copilot is fine. Chapter 0 covers the setup.
-- Visual Studio 2026 or VS Code, for writing your own code
-
-The runner runs Python, C#, and JavaScript only when the matching tool is installed. A missing tool hides its tab rather than failing.
-
-> `setup.ps1` installs these tools with winget, clones the course, and installs the lesson runner's packages. Run it with `powershell -NoProfile -ExecutionPolicy Bypass -File .\setup.ps1`, then `npm start` in `lesson-runner`.
-
----
-
-## Third Party Licenses
-
-| Component | License | Used for |
-|---|---|---|
-| Electron | MIT | The lesson runner's desktop window |
-| markdown-it | MIT | Rendering lesson Markdown |
-| highlight.js | BSD-3-Clause | Coloring code in the lessons and the editor |
-
-All three are approved for closed-source commercial use under the Development Rules of Engagement.
-
----
-
 ## Known conflicts and compatibility notes
 
-- **Platform:** the lesson runner is for Windows. Other platforms are untested.
-- **Solution files:** the Chapter 1 homework's `solution.md` has been removed. Its reasoning is in `prompt.md`.
-- **Links to internal documents:** the links in the sections above point to files in the DataBank repositories. Copies may not be in this repository, and the `resources/` folder is excluded from it on purpose, because it holds internal material. Check the links before you rely on them.
+* The lesson runner is for Windows. Other platforms are untested.
+* The runner hides a language tab when its tool is not installed, so the runner can show fewer tabs than this README describes.
+* Some links point to the `resources/` folder, which is not included in this repository, so those links may not resolve.
 
 ---
 
-## Version history
+## Authorship note
+
+This course was written by me to teach DataBank IMX developers how to work well with AI coding assistants. I used generative AI in places for drafting, review, and cleanup, as with the other training repositories.
+
+~ Scott McLean, 2026
+
+---
+
+## Release version
 
 | Date | Changes |
 |---|---|
-| 11/10/2026 | Initial version. Chapter 0 and Chapter 1 (drafted), the lesson runner with Run, Check, the solution gate, the prompt file, and syntax and output checks |
-| 11/10/2026 | Completed course. Chapters 0 to 17 and the cheat-sheet appendix with its glossary (Chapter 18). Chapters 0 to 16 each end with a summary and three quizzes. The lesson runner adds F5 and Ctrl+F5, ghost text, a zoomable code view, and a Check that compares output with each step's expected result. The setup script (`setup.ps1`) installs the tools and the lesson runner. The course checker (`tools/check-course.js`) checks files, prerequisites, quizzes, and em dashes. The capstone has a brief, a spec, an acceptance table, and a rubric. |
+| 11/10/2026 | Initial release: Chapters 0 to 18 with the cheat-sheet appendix and glossary, the lesson runner with Run, Check, the solution gate, and the prompt file, the setup script (`setup.ps1`), and the course checker (`tools/check-course.js`) |
 
 ---
 
 ## Contact
 
-- [Scott McLean](mailto:smclean@databankimx.com)
-- [Dev Team](mailto:development@databankimx.com)
+* [Scott McLean](mailto:smclean@databankimx.com)
+* [Dev Team](mailto:development@databankimx.com)

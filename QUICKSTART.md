@@ -4,36 +4,116 @@ This guide gets the lesson runner open. The runner is a desktop window, so the c
 
 ## Quick setup with the script
 
-`setup.ps1` checks for Git, Node.js, Python, the .NET SDK, the C++ Build Tools, and Visual Studio Code. It installs anything that's missing with winget, clones the repository if you don't have it yet, installs the npm packages exactly as recorded in `package-lock.json`, makes sure the Electron binary is present, and runs the runner's tests. It's safe to run more than once.
+### What gets installed
 
-Open PowerShell, go to the repository folder, and run:
+By default, the setup installs:
+
+* Notepad++
+* Git
+* PowerShell 7
+* Node.js 24 or newer
+* Python 3.12
+* .NET SDK 10
+* Microsoft Visual C++ runtime
+* VS Code, with the extensions ms-dotnettools.csharp, ms-dotnettools.csdevkit, ms-python.python
+
+The C++ Build Tools aren't installed up front. The script installs them only if Electron's binary can't download.
+
+The setup then runs these steps: Lesson runner packages; Lesson runner tests. At the end it opens the repository in VS Code and starts the lesson runner window (Electron).
+
+### Getting started
+
+There are three methods available to set up this tutorial. They are currently Windows-only.
+
+#### Full Automation (if you don't have Git currently set up)
+
+This process will install Git and copy the repository to a subfolder of `C:\Development\training` and install all necessary software and extensions for the tutorial's lesson runner.
+
+1. Obtain the tutorial's GitHub slug name, which is `training-ai-assisted-coding`
+2. Open PowerShell using "Run as Administrator"
+3. Run the script below
 
 ```pwsh
+# Obtain the load tutorial script
+irm https://raw.githubusercontent.com/databankimx/training-shared-template/main/load-tutorial.ps1 -OutFile "$env:TEMP\load-tutorial.ps1"
+
+# Perform automated setup
+powershell -NoProfile -ExecutionPolicy Bypass -File "$env:TEMP\load-tutorial.ps1" -RepoUrl https://github.com/databankimx/training-ai-assisted-coding.git
+```
+
+#### Automated Setup from Local Repo (assumes you already have Git installed and set up)
+
+In this process, you pull the existing repository and then run its setup script, which installs all necessary software and extensions for the tutorial's lesson runner.
+
+1. Obtain the tutorial's GitHub slug name, which is `training-ai-assisted-coding`
+2. Open PowerShell using "Run as Administrator"
+3. If you will use the default base directory `C:\Development\training`, run the following:
+
+```pwsh
+# Create the base folder if it doesn't exist yet
+New-Item -ItemType Directory -Force -Path C:\Development\training | Out-Null
+```
+
+4. Clone the repository. If you're using a different base directory, replace `C:\Development\training` with your path:
+
+```pwsh
+# Go there and clone the tutorial
+cd C:\Development\training
+git clone https://github.com/databankimx/training-ai-assisted-coding.git
+cd training-ai-assisted-coding
+```
+
+5. If desired, edit the setup configuration, which determines what software is installed automatically (see "Change what gets installed" below)
+
+```pwsh
+# Optional: edit setup.json before installations
+notepad setup.json
+```
+
+6. Save the configuration if you edited it, then run the setup script
+
+##### If using the default base path, run this:
+
+```pwsh
+# Run the setup
 powershell -NoProfile -ExecutionPolicy Bypass -File .\setup.ps1
 ```
 
-The `-ExecutionPolicy Bypass` part lets this one script run. It doesn't change any setting on your machine.
-
-The script installs the following if they're missing:
-
-- Git
-- Node.js LTS, which must be version 24 or later
-- Python 3.12
-- The .NET 10 SDK, for the C# lessons
-- The Visual Studio Build Tools with the C++ workload
-- Visual Studio Code
-
-The Build Tools need an **Administrator** PowerShell. They're about 4 to 5 GB and can take several minutes. If you aren't an administrator, the script stops at that step and says so. Open PowerShell as Administrator, then run the script again.
-
-If you only want to check your setup, without installing anything, add `-SkipInstall`:
+##### If using a different base path, replace `<BASE_DIR>` with your path and run this:
 
 ```pwsh
-powershell -NoProfile -ExecutionPolicy Bypass -File .\setup.ps1 -SkipInstall
+# Run the setup
+powershell -NoProfile -ExecutionPolicy Bypass -File .\setup.ps1 -BaseDirectory <BASE_DIR>
 ```
 
-Installing uses winget. If winget isn't available, install **App Installer** from the Microsoft Store first. Company policy can block installs, in which case the script stops and you'll need IT.
+#### Manual Setup from Local Repo
 
-When the script finishes, it prints a summary and the commands to start the runner. Every line should say `ok`.
+If you want to do everything manually, you can pull the repository and set up software on your own.
+
+1. Obtain the tutorial's GitHub slug name, which is `training-ai-assisted-coding`
+2. Run the script below
+
+```pwsh
+git clone https://github.com/databankimx/training-ai-assisted-coding.git
+```
+
+3. Review README.md and QUICKSTART.md in the repository for instructions for manual setup.
+
+### Switches and notes
+
+* `-SkipInstall` checks what's installed and installs nothing.
+* `-NoLaunch` runs the setup but doesn't open VS Code or start the runner.
+* `-SkipTests` skips the course tests, which the setup runs by default.
+* Installing uses winget. If winget isn't available, install **App Installer** from the Microsoft Store first. Company policy can block installs, in which case the script stops and you'll need IT.
+* If an install needs administrator rights, the script stops before installing anything and asks you to run it again from an Administrator PowerShell window.
+
+### Change what gets installed
+
+The settings are in `setup.json`, in the repository folder. Open it in any text editor:
+
+* Set an install's `"install"` to `true` to include it, or `false` to skip it.
+* `"pinned"` sets the version. `"extensions"` lists the VS Code extensions to add.
+* Save the file, then run `setup.ps1` again. It skips what's already installed.
 
 ## If you run the script from outside the repository
 
@@ -129,6 +209,7 @@ The saved progress includes your quiz answers, which solutions you've revealed, 
 - **Setup says the tests failed.** The message says so, and the full output is needed to find the cause. Send it to the course owner, since it means the course's own files need attention.
 - **The runner says Node.js wasn't found.** Open a new terminal after installing Node.js, so it has the updated PATH, then start the runner again.
 - **`npm start` fails with "package.json not found".** You're in the repository root. Change to the `lesson-runner` folder first.
+- **The first C# run prints a long .NET welcome message and waits.** This happens once, the first time the .NET SDK runs on your computer. Press Escape to stop it, then run the file again. After that, C# runs as expected.
 - **A program runs for a long time.** Press Escape to stop it. Check the program for a loop with no end.
 - **A lesson's quiz shows an error.** Report the lesson. It's a fault in the course, not in your setup.
 - **Progress looks wrong, or the runner opens an old view.** Restart the runner. If it still looks wrong, reset progress as described above.
